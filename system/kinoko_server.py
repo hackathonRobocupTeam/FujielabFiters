@@ -64,21 +64,25 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         global list, modules
         module = paramater['module_name']
         status_name = paramater['status_name']
+        # status がない場合登録
+        if not status_name in list:
+            list.update({status_name: "None"})
         if module in modules:
-            if paramater['time'] == "-1":
-                # 即座にreturn
-                pass
-            else:
+            if not status_name in modules[module]:
+                modules[module].update({status_name: "None"})
+            if paramater['time'] != "-1":
                 time.sleep(float(paramater['time']))
             # 古いデータと今のデータの比較
-            return modules[module][status_name] is not list[status_name]
+            if modules[module][status_name] not in list[status_name]:
+                modules[module][status_name] = copy.deepcopy( list[status_name])
+                return True
+            else:
+                return False
+
         # moduleの登録
         else:
-            # status がない場合登録
-            if not paramater['status_name'] in list:
-                list.update({status_name: "None"})
-            modules.update({module: {status_name: copy.deepcopy(list[status_name])}})
-            return False
+           modules.update({module: {status_name: copy.deepcopy(list[status_name])}})
+           return False
 
 def makeHttpServer(IP=None):
     if IP is None:
@@ -98,4 +102,6 @@ if __name__ == '__main__':
         cmd = raw_input()
         if "list" == cmd:
             print list
+        if 'modules' == cmd:
+            print modules
 
