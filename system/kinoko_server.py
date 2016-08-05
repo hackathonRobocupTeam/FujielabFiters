@@ -29,8 +29,8 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         except:
             paramater = {}
         if len(paramater) > 0:
-            if 'commit' in paramater['role']:
-                item = self.__commit(paramater)
+            if 'push' in paramater['role']:
+                item = self.__push(paramater)
             if 'pull' in paramater['role']:
                 item = self.__pull(paramater) 
             if 'update' in paramater['role']:
@@ -43,7 +43,7 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.write(item)
 
     # リクエストに応じた情報を追加
-    def __commit(self, paramater):
+    def __push(self, paramater):
         global list
         if paramater['status_name'] in list:
              list[paramater['status_name']] = paramater['status']
@@ -71,16 +71,13 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             else:
                 time.sleep(float(paramater['time']))
             # 古いデータと今のデータの比較
-            if modules[module][status_name] is list[status_name]:
-                return False
-            else:
-                return True
+            return modules[module][status_name] is not list[status_name]
         # moduleの登録
         else:
             # status がない場合登録
             if not paramater['status_name'] in list:
-                list.update({paramater['status_name']: "None"})
-            modules.update({paramater['module_name']: [paramater['status_name'], copy.deepcopy(list[paramater['status_name']])]})
+                list.update({status_name: "None"})
+            modules.update({module: {status_name: copy.deepcopy(list[status_name])}})
             return False
 
 def makeHttpServer(IP=None):
