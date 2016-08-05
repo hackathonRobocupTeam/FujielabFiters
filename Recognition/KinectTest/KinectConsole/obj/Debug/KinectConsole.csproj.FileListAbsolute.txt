@@ -9,3 +9,8 @@ C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectConsole\
 C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.exe.config
 C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.exe
 C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.pdb
+C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.exe
+C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.pdb
+C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Debug\Microsoft.Kinect.dll
+C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Debug\Microsoft.Kinect.xml
+C:\Users\jakky_2\Documents\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.csprojResolveAssemblyReference.cache

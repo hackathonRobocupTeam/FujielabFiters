@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Kinect;
 using System.Drawing;
+using System.IO;
+
 
 namespace KinectConsole
 {
@@ -14,7 +16,7 @@ namespace KinectConsole
         {
             Tracking tracking = new Tracking();
             tracking.START();
-
+                
             while (true)
             {
 
@@ -29,14 +31,18 @@ namespace KinectConsole
 
         /// <summary>スケルトン用バッファ</summary>
         private Skeleton[] skeleton;
+       
+        private int fn = 0;
 
         private KinectSensor kinectSensor1;
         private KinectSensor kinectSensor2;
-        byte[] colorImage;
+        ColorImagePoint[] colorImage;
         DepthImagePixel[] depthpixel;
 
         /// <summary>深度情報→ポイントクラウドに変換するためのCoorinateMapper</summary>
         private CoordinateMapper coordinateMappper;
+
+        private ColorImageFormat colorImageformat;
 
         /// <summary>
         /// Kinectのスタート
@@ -58,20 +64,20 @@ namespace KinectConsole
 
             //深度イメージの有効化・大きさの定義
             this.kinectSensor1.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
-            //this.kinectSensor2.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+           // this.kinectSensor2.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
 
             //骨格トラッキングの有効化・大きさの定義
             this.kinectSensor1.SkeletonStream.Enable();
             //this.kinectSensor2.SkeletonStream.Enable();
 
             //colorImageの領域確保
-            colorImage = new byte[this.kinectSensor1.ColorStream.FramePixelDataLength];
+            colorImage = new ColorImagePoint[this.kinectSensor1.ColorStream.FramePixelDataLength];
 
             
 
             
             //全てのFrameのイベントハンドラ
-            kinectSensor1.AllFramesReady += KinectSensor_AllFramesReady;
+            kinectSensor1.AllFramesReady += KinectSensor_AllFramesReady2;
            // kinectSensor2.AllFramesReady += KinectSensor_AllFramesReady2;
 
             //Kinectセンサーの起動
@@ -122,7 +128,7 @@ namespace KinectConsole
                             skeletonFrame.CopySkeletonDataTo(skeleton);
 
                             Console.WriteLine(string.Format("{0},{1},{2},{3}",
-                                depthImagePixels[1000].PlayerIndex,
+                                "left",
                                 skeleton[5].Position.X,
                                 skeleton[5].Position.Y,
                                 skeleton[5].Position.Z));
@@ -140,6 +146,13 @@ namespace KinectConsole
         /// <param name="e"></param>
         public void KinectSensor_AllFramesReady2(object sender, AllFramesReadyEventArgs e)
         {
+            
+            string labelingFile = Path.Combine(
+              "C:/Users/jakky_2/Pictures/kobusi/player" + fn + ".txt");
+            StreamWriter sw = new StreamWriter(labelingFile, append: false, encoding: Encoding.UTF8);
+            int count = 0;
+            int val = 0;
+
             //AllFrameReadyEvebtArgs内から、各要素のフレーム情報を取得することができる
             using (ImageFrame imageFrame = e.OpenColorImageFrame())
             {
@@ -150,18 +163,32 @@ namespace KinectConsole
                         // 深度画像の生データ（PlayerIndexなども入っている）の配列を取得
                         DepthImagePixel[] depthImagePixels = depthFrame.GetRawPixelData();
 
-                        // depthImagePixelsと同じ数だけのポイントデータを作成する
-                        if (this.skeletonPoints == null ||
-                            this.skeletonPoints.Length != depthImagePixels.Length)
+
+                        for (int u = 0; u < depthImagePixels.Length; u++)
                         {
-                            this.skeletonPoints = new SkeletonPoint[depthImagePixels.Length];
+                            if (depthImagePixels[u].PlayerIndex != 0)
+                            {
+                                sw.Write("1");
+                                val++;
+                            }
+                            else
+                                sw.Write("0");
 
+                            count++;
+
+                            if (count >= 640)
+                            {
+                                sw.Write("\n");
+                                count = 0;
+                            }
                         }
-
-                        // 深度ピクセルを変換して skeletonPoints にする
-                        this.coordinateMappper.MapDepthFrameToSkeletonFrame(
-                            depthFrame.Format, depthImagePixels, skeletonPoints);
-
+                            if (val != 0)
+                            {
+                                fn++;
+                            }
+                        
+                        sw.Close();
+                        sw.Dispose();
 
                         //スケルトンの処理
                         Skeleton[] skeleton = new Skeleton[skeletonFrame.SkeletonArrayLength];
@@ -170,7 +197,7 @@ namespace KinectConsole
                             skeletonFrame.CopySkeletonDataTo(skeleton);
 
                             Console.WriteLine(string.Format("{0},{1},{2},{3}",
-                                depthImagePixels[1000].PlayerIndex,
+                                fn,
                                 skeleton[5].Position.X,
                                 skeleton[5].Position.Y,
                                 skeleton[5].Position.Z));
