@@ -1,0 +1,14 @@
+c:\users\jakky_2\documents\visual studio 2015\Projects\KinectTest\KinectTest\bin\Debug\KinectTest.exe.config
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\bin\Debug\KinectTest.exe
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\bin\Debug\KinectTest.pdb
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.csprojResolveAssemblyReference.cache
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\MainWindow.g.cs
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\App.g.cs
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest_MarkupCompile.cache
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest_MarkupCompile.lref
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\MainWindow.baml
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.g.resources
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.Properties.Resources.resources
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.csproj.GenerateResource.Cache
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.exe
+C:\Users\jakky_2\Documents\Visual Studio 2015\Projects\KinectTest\KinectTest\obj\Debug\KinectTest.pdb
