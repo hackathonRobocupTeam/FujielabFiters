@@ -1,0 +1,9 @@
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\bin\Debug\FFgameUI.exe.config
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\bin\Debug\FFgameUI.exe
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\bin\Debug\FFgameUI.pdb
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.csprojResolveAssemblyReference.cache
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.Form1.resources
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.Properties.Resources.resources
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.csproj.GenerateResource.Cache
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.exe
+c:\users\mamoru\documents\visual studio 2015\Projects\FFgameUI\FFgameUI\obj\Debug\FFgameUI.pdb
