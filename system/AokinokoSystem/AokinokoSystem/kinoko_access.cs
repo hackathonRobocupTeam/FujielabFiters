@@ -1,24 +1,23 @@
+using System;
 using System.Net;
-using System.Net.Sockets;
-using System.Text;
+using System.IO;
 
 namespace KinokoLib
 {
 	public class AccessClass
 	{
+		private static string url = "http://localhost:2828?";
         public static string push(string status_name, string status)
         {
-            string url = "http://localhost:2828";
-            HttpListener listener = new HttpListener();
-            listener.Prefixes.Add(url);
-            listener.Start();
-
-            HttpListenerContext context = listener.GetContext();
-            HttpListenerRequest req = context.Request;
-            HttpListenerResponse res = context.Response;
-
-
-
+			WebRequest wrGETURL;
+			string reqstr = url + "role=push%26status_name=" + status_name + "%26status=" + status;
+ 			wrGETURL = WebRequest.Create(reqstr);
+			WebProxy myProxy = new WebProxy("myproxy",80);
+			myProxy.BypassProxyOnLocal = true;
+			wrGETURL.Proxy = WebProxy.GetDefaultProxy();
+			Stream objStream;
+			objStream = wrGETURL.GetResponse().GetResponseStream();
+			
 
             //return "SUCCESS";
             return;
