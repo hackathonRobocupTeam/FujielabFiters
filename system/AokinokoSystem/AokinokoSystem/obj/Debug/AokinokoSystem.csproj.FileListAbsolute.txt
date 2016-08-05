@@ -1,0 +1,8 @@
+c:\users\jakky_2\documents\visual studio 2015\Projects\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe.config
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe.config
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.csprojResolveAssemblyReference.cache
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.pdb
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\test.dll
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.exe
+C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.pdb

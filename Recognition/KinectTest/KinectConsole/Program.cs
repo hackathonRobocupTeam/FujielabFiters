@@ -174,13 +174,7 @@ namespace KinectConsole
                             else
                                 sw.Write("0");
 
-                            count++;
-
-                            if (count >= 640)
-                            {
-                                sw.Write("\n");
-                                count = 0;
-                            }
+                            sw.Write(",");
                         }
                             if (val != 0)
                             {
