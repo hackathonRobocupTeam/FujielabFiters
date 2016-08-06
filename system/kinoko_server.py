@@ -37,7 +37,7 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 item = self.__update(paramater)
         else:
             item = "Error"
-        print item
+        print(item)
         self.send_response(200)
         self.end_headers()
         self.wfile.write(item)
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     while True:
         cmd = raw_input()
         if "list" == cmd:
-            print list
+            print (list)
         if 'modules' == cmd:
-            print modules
+            print(modules)
 
