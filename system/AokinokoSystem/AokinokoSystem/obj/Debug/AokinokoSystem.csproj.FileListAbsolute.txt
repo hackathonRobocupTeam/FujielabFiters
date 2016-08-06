@@ -13,3 +13,10 @@ C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\Aokin
 C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.pdb
 C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\kinoko_access.cs
 C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.csprojResolveAssemblyReference.cache
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe.config
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.exe
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.pdb
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\kinoko_access.cs
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.pdb
+C:\Users\mamoru\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.csprojResolveAssemblyReference.cache
