@@ -160,6 +160,9 @@ namespace KinectConsole
                 {
                     using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
                     {
+                        int[] player2 = new int[640*480];
+                        int kobusi = 3000;
+                        bool guard =false;
                         // 深度画像の生データ（PlayerIndexなども入っている）の配列を取得
                         DepthImagePixel[] depthImagePixels = depthFrame.GetRawPixelData();
 
@@ -168,18 +171,16 @@ namespace KinectConsole
                         {
                             if (depthImagePixels[u].PlayerIndex != 0)
                             {
-                                sw.Write("1");
-                                val++;
+                                player2[u] = 1;
+                                //sw.Write("1");                               
                             }
                             else
-                                sw.Write("0");
+                                player2[u] = 0;
+                                //sw.Write("0");
 
-                            sw.Write(",");
                         }
-                            if (val != 0)
-                            {
-                                fn++;
-                            }
+                        //当たり判定
+                        this.AttackJudge(player2,kobusi,guard);
                         
                         sw.Close();
                         sw.Dispose();
@@ -202,6 +203,42 @@ namespace KinectConsole
             }//using破棄
 
         }
+
+
+        ///////////////
+        public void AttackJudge(int[] player2, int kobusi, bool guard)
+        {
+            int m = 0;
+            int[] pos = new int[640 * 480];  //プレイヤーの領域
+
+            for (int x = 0; x < 640 * 480; x++)   //配列の中身全回し
+            {
+                if (player2[x] == 1)
+                {
+                        pos[m] = x;
+                        //Console.Write("{0}\t", pos[m]);
+                        m++;
+                }
+            }
+            int count;
+            bool result = false;
+            for (count = 0; count < m; count++)
+            {
+                if (kobusi == pos[count])    //当たったらresultを0にする
+                {
+                    result = true;
+                }
+            }
+            if (guard == 1)         //ガードされたらredultを0にする
+            {
+                result = false;
+            }
+            Console.Write(">{0}", result);
+            //Console.ReadKey(); //自動で終わらないようにする 
+            return result;
+        }
+
+
     }
     
 }
