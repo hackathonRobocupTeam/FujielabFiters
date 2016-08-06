@@ -6,3 +6,10 @@ C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\b
 C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\test.dll
 C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.exe
 C:\Users\jakky_2\Documents\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.pdb
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe.config
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.exe
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.pdb
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.exe
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\AokinokoSystem.pdb
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\bin\Debug\kinoko_access.cs
+C:\Users\aka\FujielabFiters\system\AokinokoSystem\AokinokoSystem\obj\Debug\AokinokoSystem.csprojResolveAssemblyReference.cache
