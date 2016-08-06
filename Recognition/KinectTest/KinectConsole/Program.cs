@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Kinect;
 using System.Drawing;
 using System.IO;
+using KinokoLib;
 
 
 namespace KinectConsole
@@ -229,15 +230,16 @@ namespace KinectConsole
                     result = true;
                 }
             }
-            if (guard == 1)         //ガードされたらredultを0にする
+            if (guard == true)         //ガードされたらredultを0にする
             {
                 result = false;
             }
             Console.Write(">{0}", result);
             //Console.ReadKey(); //自動で終わらないようにする 
-            return result;
+            AccessClass.push("Judge",result.ToString());
+            
         }
-
+        
 
     }
     
