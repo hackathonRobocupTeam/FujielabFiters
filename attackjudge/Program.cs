@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using KinokoLib;
 
 namespace attackjudge_2
 {
@@ -14,6 +15,7 @@ namespace attackjudge_2
             int m=0;
             int[] ln = new int[640 * 480];  //intに変換後の配列
             int[] pos = new int[640 * 480];  //プレイヤーの領域
+            bool result = false;
             using (StreamReader r = new StreamReader("player1.txt")) //テキストファイルの読み込み
             {
                 string line;    //読み込み先のstring
@@ -42,21 +44,23 @@ namespace attackjudge_2
                 int handinit=307031;    //拳の位置
                 int guard=0;            //ガード判定
                 int count;
-                int result = 0;
+                
                 for (count = 0; count < 640 * 480; count++)
                 {
                     if(handinit==pos[count])    //当たったらresultを0にする
                     {
-                        result = 1;
+                        result = true;
                         Console.Write(">Hit\n");
                     }
                 }
                 if (guard == 1)         //ガードされたらredultを0にする
                 {
-                    result = 0;
+                    result = false;
                 }
                 Console.Write(">{0}",result);
-            } Console.ReadKey(); //自動で終わらないようにする 
+            } 
+            AccessClass.push("Judge", result.ToString());
+            Console.ReadKey(); //自動で終わらないようにする
         }
     }
 }
