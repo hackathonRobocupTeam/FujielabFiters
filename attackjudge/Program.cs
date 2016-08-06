@@ -11,6 +11,8 @@ namespace attackjudge
     {
         /// <summary>
         /// めいんやで
+        /// ファイル入力はカンマ区切り、1次元
+        /// 拳の入力は2次元、座標1点のみ
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -25,11 +27,11 @@ namespace attackjudge
                 string line;    //読み込み先のstring
                 char delimiter = ','; //,区切り検出のための変数
                 //int m=0;
-                int playercoounty;
-                int playercountx;
-                int poscounty = 0;
-                int poscountx = 0;
-                int loop = 0;
+                int playercoounty;  //for文用
+                int playercountx;   //for文用
+                int poscounty = 0;  //配列用
+                int poscountx = 0;  //配列用
+                int loop = 0;       //配列用
                 while ((line = r.ReadLine()) != null)   //ファイルの最後まで1行ずつ読み込み
                 {
 
@@ -70,7 +72,7 @@ namespace attackjudge
 
                                 //Console.Write("posy>{0}\tposx>{1}\n",posy[poscounty],posx[poscountx]); //290,127;
 
-                                poscountx++;    //poscoountxのカウント用
+                                poscountx++;    //poscountxのカウント用
                                 poscounty++;    //poscountyのカウント用
 
 
@@ -83,11 +85,11 @@ namespace attackjudge
             }
             int handxinit = 0;    //手のx座標
             int handyinit = 0;    //手のy座標
-            int handcountx;
-            int handcounty;
-            int judgex = 0;
-            int judgey = 0;
-            int result = 0;
+            int handcountx;       //for文用
+            int handcounty;       //for文用
+            int judgex = 0;       //xの判定
+            int judgey = 0;       //yの判定
+            int result = 0;       //結果
             for (handcountx = 0; handcountx < 640 * 480; handcountx++)
             {
                 if (handxinit == posx[handcountx])   //x座標の比較
