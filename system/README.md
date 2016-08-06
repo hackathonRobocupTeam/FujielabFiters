@@ -14,4 +14,10 @@
 
 のみ
 
-使い方はそれぞれソースを見てください
+使い方はそれぞれ以下のサンプルコードとソースを見てください
+
+AokinokoSystem/kinoko_access.cs    -----ソース
+
+AokinokoSystem/test.cs    -----サンプル
+
+参照してれば使えるはず
