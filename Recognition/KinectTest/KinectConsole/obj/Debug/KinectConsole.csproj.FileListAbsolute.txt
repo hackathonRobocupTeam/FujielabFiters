@@ -23,3 +23,8 @@ C:\Users\heatredn\attackjudje\FujielabFiters\Recognition\KinectTest\KinectConsol
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.exe.config
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.exe
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.pdb
+C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.csprojResolveAssemblyReference.cache
+C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.exe
+C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\KinectConsole.pdb
+C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\Microsoft.Kinect.dll
+C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\Microsoft.Kinect.xml
