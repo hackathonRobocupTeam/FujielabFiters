@@ -1,4 +1,4 @@
-# FujielabFiters
+# FujielabFighters
 
 某研究室の夏休み企画にて作る格闘ゲーム
 
