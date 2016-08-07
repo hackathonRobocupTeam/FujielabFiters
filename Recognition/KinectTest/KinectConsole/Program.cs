@@ -5,14 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Kinect;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.IO;
 using KinokoLib;
 
 
 namespace KinectConsole
 {
+    /// <summary>
+    /// Mainのみを持つクラス
+    /// </summary>
     public class Kinect
     {
+        /// <summary>
+        /// Mainのみを持つ関数
+        /// Trackingの起動
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             Tracking tracking = new Tracking();
@@ -26,21 +36,26 @@ namespace KinectConsole
         }
     }
 
-
+    /// <summary>
+    /// ゲーム用の各種データをKinectから取りこむクラス
+    /// Kinect二台使用
+    /// </summary>
     internal class Tracking
     {
 
 
         private KinectSensor kinectSensor1;
         private KinectSensor kinectSensor2;
+        //private byte[] colorImage1;
+        //private byte[] colorImage2;
 
         /// <summary>深度情報→ポイントクラウドに変換するためのCoorinateMapper</summary>
         private CoordinateMapper coordinateMappper1;
         private CoordinateMapper coordinateMappper2;
 
         //プレイヤー情報/////
-        private int[] player1 = new int[320 * 240];
-        private int[] player2 = new int[320 * 240];
+        private int[] player1 = new int[640 * 480];
+        private int[] player2 = new int[640 * 480];
 
         private int kobusi1;
         private int kobusi2;
@@ -50,6 +65,9 @@ namespace KinectConsole
         private bool guard2 = false;
         private bool attack1 = false;
         private bool attack2 = false;
+
+        private bool jutsu1 = false;
+        private bool jutsu2 = false;
 
         private bool check1 = false;
         private bool check2 = false;
@@ -84,8 +102,13 @@ namespace KinectConsole
             //this.kinectSensor2.ColorStream.Enable(ColorImageFormat.InfraredResolution640x480Fps30);
 
             //深度イメージの有効化・大きさの定義
-            this.kinectSensor1.DepthStream.Enable(DepthImageFormat.Resolution320x240Fps30);
-            this.kinectSensor2.DepthStream.Enable(DepthImageFormat.Resolution320x240Fps30);
+            this.kinectSensor1.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+            this.kinectSensor2.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+
+
+            //colorImage1 = new byte[this.kinectSensor1.ColorStream.FramePixelDataLength];
+            //colorImage2 = new byte[this.kinectSensor2.ColorStream.FramePixelDataLength];
+
 
 
             //骨格トラッキングの有効化・大きさの定義
@@ -121,8 +144,13 @@ namespace KinectConsole
         public void KinectSensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
             //AllFrameReadyEvebtArgs内から、各要素のフレーム情報を取得することができる
-            // using (ImageFrame imageFrame = e.OpenColorImageFrame())
-            //{
+           /* using (ImageFrame imageFrame = e.OpenColorImageFrame())
+            {
+                Bitmap bmap = ImageToBitmap(1,colorImage1, e.OpenColorImageFrame());
+                GuardGet(bmap);
+            }
+            */
+
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
             {
                 // 深度画像の生データ（PlayerIndexなども入っている）の配列を取得
@@ -153,16 +181,20 @@ namespace KinectConsole
                    // Console.WriteLine("Player1 Command...");
                     foreach (Skeleton skel in skeleton)
                     {
-                        PunchCheker("player1", skel);
-
-                        //Player1の攻撃が成功したら
-                        if (attack1 == true)
+                        if (skel.TrackingState == SkeletonTrackingState.NotTracked)
                         {
-                                Console.WriteLine("Player1 Attacked!!");
-                                AttackJudge("player1", player2, kobusi1, guard2);
+                            continue;
                         }
+                        ActionChecker1("player1", skel);
 
-                        attack1 = false;
+                        if(what_move1() == "attack")
+                            AttackJudge("player1", player2, kobusi1, guard2);
+
+                        #region utility
+                        //AccessClass.push("player_A_move", what_move());
+                        //Console.WriteLine(what_move1()); 
+                        #endregion
+                       
                     }
                 }
                 else
@@ -176,10 +208,7 @@ namespace KinectConsole
 
         }
 
-
-
-
-
+       
 
         /// <summary>
         /// Kinect2
@@ -190,8 +219,14 @@ namespace KinectConsole
         public void KinectSensor_AllFramesReady2(object sender, AllFramesReadyEventArgs e)
         {
             //AllFrameReadyEvebtArgs内から、各要素のフレーム情報を取得することができる
-            // using (ImageFrame imageFrame = e.OpenColorImageFrame())
-            //{
+            /*
+            using (ImageFrame imageFrame = e.OpenColorImageFrame())
+            {
+                Bitmap bmap = ImageToBitmap(2,colorImage2, e.OpenColorImageFrame());
+                GuardGet(bmap);
+            }
+            */
+
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
             {
                 // 深度画像の生データ（PlayerIndexなども入っている）の配列を取得
@@ -219,81 +254,106 @@ namespace KinectConsole
 
                 if (check2 == true)
                 {
-                    //Console.WriteLine("Player2 Command...");
-
+                    
+                    // Console.WriteLine("Player1 Command...");
                     foreach (Skeleton skel in skeleton)
                     {
-                        PunchCheker("player2", skel);
-
-                        //Player1の攻撃が成功したら
-                        if (attack2 == true)
+                        
+                        if (skel.TrackingState == SkeletonTrackingState.NotTracked)
                         {
-                            Console.WriteLine("Player2 Attacked!!");
-                            AttackJudge("player2", player1, kobusi2, guard1);
+                            continue;
                         }
 
-                        attack2 = false;
+                        ActionChecker2("player2", skel);
+
+                        if(what_move2() == "attack")
+                            AttackJudge("player2",player1,kobusi2,guard1);
+
+
+                        #region utility
+                        //AccessClass.push("player_A_move", what_move());
+                        //Console.WriteLine(what_move2());
+                        #endregion
+
                     }
                 }
                 else
                 {
-                    //Console.WriteLine("Player2がいません");
+                    //Console.WriteLine("Player1がいません");
                 }
 
             }
         }
 
+        /// <summary>
+        /// Player1のやつ
+        /// </summary>
+        /// <returns></returns>
+        public string what_move1()
+        {
+            if (jutsu1)
+            {
+                // TODO: 統合の時コメントアウト解除
+                //AccessClass.push("judge", "True");
+                return "jutsu";
+            }
+            if (attack1) return "attack";
+            if (guard1) return "guard";
+            return "normal";
+
+        }
+
+        /// <summary>
+        /// Player2のやつ
+        /// </summary>
+        /// <returns></returns>
+        public string what_move2()
+        {
+            if (jutsu2)
+            {
+                // TODO: 統合の時コメントアウト解除
+                //AccessClass.push("judge", "True");
+                return "jutsu";
+            }
+            if (attack2) return "attack";
+            if (guard2) return "guard";
+            return "normal";
+
+        }
 
 
 
         ///////////////     攻撃判定用       //////////////
 
-
-            /// <summary>
-            /// 人物位置と拳の位置、ガード状態を見て攻撃判定を行う関数
-            /// </summary>
-            /// <param name="player2"></param>
-            /// <param name="kobusi"></param>
-            /// <param name="guard"></param>
+        /// <summary>
+        /// 人物位置と拳の位置、ガード状態を見て攻撃判定を行う関数
+        /// </summary>
+        /// <param name="player2"></param>
+        /// <param name="kobusi"></param>
+        /// <param name="guard"></param>
         public void AttackJudge(string hito,int[] player2, int kobusi, bool guard)
         {
-            int[] pos = new int[320 * 240];  //プレイヤーの領域
+            int[] pos = new int[640*480];  //プレイヤーの領域
+            
 
             bool result = false;
-
+            /*
+            if (player2.Length != 320*240 )
+            {
+                System.Threading.Thread.Sleep(5);
+                }*/
+            //Console.WriteLine("kobusi:{0},player2[kobusi]:{1}", kobusi, player2.Length);
+                        
             if (player2[kobusi] == 1)
             {
                 result = true;
             }
-
-            /*
-            //int count = 0;
-            //int m = 0;
-            for (int x = 0; x < 320 * 240; x++)   //配列の中身全回し
-            {
-                if (player2[x] == 1)
-                {
-                        pos[m] = x;
-                        //Console.Write("{0}\t", pos[m]);
-                        m++;
-                }
-            }
-            for (count = 0; count < m; count++)
-            {
-                if (kobusi == pos[count])    //当たったらresultを0にする
-                {
-                    result = true;
-                }
-            }
-            */
-
-            if (guard == true)         //ガードされたらredultを0にする
-            {
-                result = false;
-            }
+            
             Console.WriteLine(hito+"Attack >{0}", result);
+
             //Console.ReadKey(); //自動で終わらないようにする 
-           // AccessClass.push("Judge", result.ToString());
+
+            //AccessClass.push("judge", result.ToString());
 
         }
 
@@ -305,6 +365,204 @@ namespace KinectConsole
 
 
         ///////     識別用     ////////
+
+        /// <summary>
+        /// 面倒くさいので指定できる関数作った
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="action"></param>
+        /// <param name="ToF"></param>
+        public void PlayerSetter(string player,string action,bool ToF)
+        {
+            if (player == "player1")
+            {
+                switch (action)
+                {
+                    case "attack":
+                        attack1 = ToF;
+                        break;
+
+                    case "guard":
+                        guard1 = ToF;
+                        break;
+
+                    case "jutsu":
+                        jutsu1 = ToF;
+                        break;                       
+                }
+            }
+            else if (player == "player2")
+            {
+                switch (action)
+                {
+                    case "attack":
+                        attack2 = ToF;
+                        break;
+
+                    case "guard":
+                        guard2 = ToF;
+                        break;
+
+                    case "jutsu":
+                        jutsu2 = ToF;
+                        break;
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Action認識を統一
+        /// 必殺技→攻撃→防御という優先度
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="skel"></param>
+        public void ActionChecker1(string player,Skeleton skel)
+        {
+            JutsuChecker(player,skel);
+
+            if (jutsu1 != true)
+            {
+                PunchCheker(player, skel);
+
+                if (jutsu1 != true)
+                {
+                    GuardChecker(player, skel);
+                }
+                else
+                {
+                    guard1 = false;
+                }
+            }
+            else
+            {
+                attack1 = false;
+                guard1 = false;
+            }
+        }
+
+        /// <summary>
+        /// Action認識を統一
+        /// 必殺技→攻撃→防御という優先度
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="skel"></param>
+        public void ActionChecker2(string player, Skeleton skel)
+        {
+            JutsuChecker(player, skel);
+
+            if (jutsu1 != true)
+            {
+                PunchCheker(player, skel);
+
+                if (jutsu1 != true)
+                {
+                    GuardChecker(player, skel);
+                }
+                else
+                {
+                    guard2 = false;
+                }
+            }
+            else
+            {
+                attack2 = false;
+                guard2 = false;
+            }
+        }
+
+
+        /// <summary>
+        /// 必殺技のコマンド
+        /// 頭よりも手を上にあげる
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="skeleton"></param>
+        public void JutsuChecker(string player,Skeleton skeleton)
+        {
+            //頭の上に左手
+            if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.Head].Position.Y + 0.2)
+            {
+                if (player == "player1") { jutsu1 = true; }
+
+                else if (player == "player2") { jutsu2 = true; }
+
+                Console.WriteLine(player + "の必殺技！！！！");
+            }
+
+            //頭の上に右手
+            else if (skeleton.Joints[JointType.HandRight].Position.Y > skeleton.Joints[JointType.Head].Position.Y + 0.2)
+            {
+                if (player == "player1") { jutsu1 = true; }
+
+                else if (player == "player2") { jutsu2 = true; }
+
+                Console.WriteLine(player + "の必殺技！！！！");
+            }
+
+            //それ以外
+            else{
+                if (player == "player1") { jutsu1 = false; }
+
+                else if (player == "player2") { jutsu2 = false; }
+            }
+        }
+
+        /// <summary>
+        /// ガード認識用関数
+        /// 1．片腕を盾のようにかざす
+        /// 2．両手を並行にして盾にする
+        /// </summary>
+        /// <param name="frame"></param>
+        public void GuardChecker(string player,Skeleton skeleton)
+        {
+            //Console.WriteLine("腕：{0},頭：{1}", skeleton.Joints[JointType.HandLeft].Position.Z, skeleton.Joints[JointType.Head].Position.Z);
+
+            //腕と肘の距離
+            if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.ElbowLeft].Position.Z) <= 0.1 
+                && skeleton.Joints[JointType.HandLeft].Position.Z + 0.25  <= skeleton.Joints[JointType.Head].Position.Z)
+            {
+                if (player == "player1") {  guard1 = true; }
+
+                else if (player == "player2") { guard2 = true; }
+
+                Console.WriteLine(player+"Guarded!:guard1");
+            }
+
+            //肘と腕の距離
+            else if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.ElbowLeft].Position.Z) <= 0.1 
+                && skeleton.Joints[JointType.HandLeft].Position.Z + 0.25 <= skeleton.Joints[JointType.Head].Position.Z)
+            {
+                if (player == "player1") { guard1 = true; }
+
+                else if (player == "player2") { guard2 = true; }
+
+
+                Console.WriteLine(player + "Guarded!:guard2");              
+            }
+
+            //両手の距離差が少ないとき
+            else if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z) <= 0.03 
+                && skeleton.Joints[JointType.HandLeft].Position.Z + 0.25 <= skeleton.Joints[JointType.Head].Position.Z)
+            {
+                if (player == "player1") { guard1 = true; }
+
+                else if (player == "player2") { guard2 = true; }
+
+
+                Console.WriteLine(player + "Guarded!:guard3");
+            }
+            else
+            {
+                if (player == "player1") { guard1 = false; }
+
+                else if (player == "player2") { guard2 = false; }
+            }
+        }
+
+
+
 
         /// <summary>
         /// 取得したDepthから人の有無を確認する関数
@@ -363,42 +621,45 @@ namespace KinectConsole
             int kobusi = 0;
             //Console.WriteLine("腕：{0},頭：{1}", skeleton.Joints[JointType.HandLeft].Position.Z, skeleton.Joints[JointType.Head].Position.Z);
 
-            //左手の距離が頭よりも近かったら
-            if (skeleton.Joints[JointType.HandLeft].Position.Z + 0.35 <= skeleton.Joints[JointType.Head].Position.Z)
+            //左手の距離が頭よりもKinectに近かったら
+            if (skeleton.Joints[JointType.HandLeft].Position.Z + 0.37 <= skeleton.Joints[JointType.Head].Position.Z)
             {
                 Point a = SkeletonPointToScreen2(skeleton.Joints[JointType.HandLeft].Position);
-                kobusi = a.X + (a.Y - 1) * 320;
-                //Console.WriteLine("Kinect Tracking");
+                
+                Console.WriteLine(":X{0}    Y:{1}", a.X, a.Y);
+                if (a.Y < 0) a.Y = 0;
+                kobusi = a.X + ((a.Y) * 640);
 
                 if (player == "player1") { kobusi1 = kobusi; attack1 = true; }
 
                 else if (player == "player2") { kobusi2 = kobusi; attack2 = true; }
 
-                else
-                    Console.WriteLine("攻撃判定においてエラーが発生しました");
+                Console.WriteLine(player + "Attaked!:Left Punching");
             }
 
-            //右手の距離が頭よりも近かったら
-            else if (skeleton.Joints[JointType.HandRight].Position.Z + 0.35 <= skeleton.Joints[JointType.Head].Position.Z)
+            //右手の距離が頭よりもKinectに近かったら
+            else if (skeleton.Joints[JointType.HandRight].Position.Z + 0.37 <= skeleton.Joints[JointType.Head].Position.Z)
             {
                 Point a = SkeletonPointToScreen2(skeleton.Joints[JointType.HandRight].Position);
-                kobusi = a.X + (a.Y - 1) * 320;
+                             
+                Console.WriteLine(":X{0}    Y:{1}", a.X, a.Y);
+                if (a.Y < 0) a.Y = 0;
+                kobusi = a.X + (a.Y) * 640;   
 
                 if (player == "player1") { kobusi1 = kobusi; attack1 = true; }
 
                 else if (player == "player2") { kobusi2 = kobusi; attack2 = true; }
-
-                else
-                    Console.WriteLine("攻撃判定においてエラーが発生しました");
+                
+                Console.WriteLine(player + "Attaked!:Right Punching");
             }
 
             else
             {
-                attack1 = false;
-                attack2 = false;
-            }
+                if (player == "player1") { attack1 = false; }
 
-        }
+                else if (player == "player2") { attack2 = false; }
+            }        
+    }
 
         
 
@@ -416,7 +677,7 @@ namespace KinectConsole
         {
             // Convert point to depth space.  
             // We are not using depth directly, but we do want the points in our 640x480 output resolution.
-            DepthImagePoint depthPoint = this.kinectSensor1.CoordinateMapper.MapSkeletonPointToDepthPoint(skelpoint, DepthImageFormat.Resolution320x240Fps30);
+            ColorImagePoint depthPoint = this.kinectSensor1.CoordinateMapper.MapSkeletonPointToColorPoint(skelpoint, ColorImageFormat.RawYuvResolution640x480Fps15);
             return new Point(depthPoint.X, depthPoint.Y);
         }
 
@@ -430,10 +691,13 @@ namespace KinectConsole
         {
             // Convert point to depth space.  
             // We are not using depth directly, but we do want the points in our 640x480 output resolution.
-            DepthImagePoint depthPoint = this.kinectSensor2.CoordinateMapper.MapSkeletonPointToDepthPoint(skelpoint, DepthImageFormat.Resolution320x240Fps30);
+            ColorImagePoint depthPoint = this.kinectSensor2.CoordinateMapper.MapSkeletonPointToColorPoint(skelpoint, ColorImageFormat.RawYuvResolution640x480Fps15);
             return new Point(depthPoint.X, depthPoint.Y);
         }
 
+
+        
+       
     }
 
 }
