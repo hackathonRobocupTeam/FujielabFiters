@@ -5,8 +5,8 @@ player_A_HP = 100 ~ 0
 player_A_MP = 100 ~ 0
 player_B_HP = 100 ~ 0
 player_B_MP = 100 ~ 0
-player_A_move = attack, gurd, nomal, jutsu
-player_B_move = attack, gurd, nomal, jutsu
+player_A_move = attack, guard, normal, jutsu
+player_B_move = attack, guard, normal, jutsu
 judge = True, False
 system_update = True, False
 
