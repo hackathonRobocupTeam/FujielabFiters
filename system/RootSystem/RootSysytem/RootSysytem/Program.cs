@@ -41,8 +41,8 @@ namespace RootSysytem
         {
             AccessClass.push("player_A_HP", "100");
             AccessClass.push("player_B_HP", "100");
-            AccessClass.push("player_A_MP", "10");
-            AccessClass.push("player_B_MP", "10");
+            AccessClass.push("player_A_MP", "30");
+            AccessClass.push("player_B_MP", "30");
 
         }
         static void event_manager()
@@ -109,6 +109,7 @@ namespace RootSysytem
                     return true;
                 }
                 HP_B = HP_B - 9;
+                MP_A = MP_A + 10;
                 MP_A = MP_A + 15;
             }
             if (who == "B")
@@ -125,6 +126,7 @@ namespace RootSysytem
                 }
                 HP_A = HP_A - 9;
                 MP_B = MP_B + 15;
+                MP_A = MP_A + 10;
             }
             AccessClass.push("player_A_MP", MP_A.ToString());
             AccessClass.push("player_A_HP", HP_A.ToString());
@@ -148,6 +150,10 @@ namespace RootSysytem
         static string who_attack()
         {
             if (AccessClass.pull("player_A_move") == "attack" && AccessClass.pull("player_B_move") == "attack" ) return "double";
+            else if (AccessClass.pull("player_A_move") == "jutsu" && AccessClass.pull("player_B_move") == "jutsu" ) return "double";
+            else if (AccessClass.pull("player_A_move") == "jutsu") return "A";
+            else if (AccessClass.pull("player_B_move") == "jutsu") return "B";
+ 
             else if (AccessClass.pull("player_A_move") == "attack") return "A";
             else if (AccessClass.pull("player_B_move") == "attack") return "B";
             // AもBもアタックしてなかったら呼ばれるはずがない
