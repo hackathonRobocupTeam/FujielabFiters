@@ -17,17 +17,6 @@ namespace FFgameUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            //FFGames.game();
         }
     }
-    /*
-    internal class FFGames
-    {
-        static public void game()
-        {
-
-        }
-    }
-    */
 }

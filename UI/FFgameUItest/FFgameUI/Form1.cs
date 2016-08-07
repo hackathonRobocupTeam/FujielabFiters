@@ -28,27 +28,27 @@ namespace FFgameUI
         /// <summary>
         /// 画像素材の読み込み,各ファイルのパスを自分の環境に合わせて
         /// </summary>
-        Image backgroundImage = Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\background2.JPG"); //背景画像読み込み
-        Image finishpanel = Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\finish.PNG");
+        Image backgroundImage = Image.FromFile(@"C:\UIimg\background2.JPG"); //背景画像読み込み
+        Image finishpanel = Image.FromFile(@"C:\UIimg\finish.PNG");
         Image[] player1Image = new Image[] { //player1の素材
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man.png"), //デフォルト画像
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man14.png"),  //攻撃時
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man11.png"),   //ガード時
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man13.png"),  //必殺技
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man22.png")};  //ダメージ
+        Image.FromFile(@"C:\UIimg\man.png"), //デフォルト画像
+        Image.FromFile(@"C:\UIimg\man14.png"),  //攻撃時
+        Image.FromFile(@"C:\UIimg\man11.png"),   //ガード時
+        Image.FromFile(@"C:\UIimg\man13.png"),  //必殺技
+        Image.FromFile(@"C:\UIimg\man22.png")};  //ダメージ
     Image showImage1;
         Image[] player2Image = new Image[] { //player2の素材
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man.png"), //デフォルト画像
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man14.png"),  //攻撃時
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man11.png"),   //ガード時
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man13.png"), //必殺技
-        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man22.png")};  //ダメージ
+        Image.FromFile(@"C:\UIimg\2man.png"), //デフォルト画像
+        Image.FromFile(@"C:\UIimg\2man14.png"),  //攻撃時
+        Image.FromFile(@"C:\UIimg\2man11.png"),   //ガード時
+        Image.FromFile(@"C:\UIimg\2man13.png"), //必殺技
+        Image.FromFile(@"C:\UIimg\2man22.png")};  //ダメージ
     Image showImage2;
-        SoundPlayer gong = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\gong.wav"); //ゴング音の読み込み
-        SoundPlayer attack = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\attack.wav");//アタック音声読み込み
-        SoundPlayer guard = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\guard.wav");//ガード音読み込み
-        SoundPlayer jutsu = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\jutsu.wav");//必殺技音読み込み
-        SoundPlayer gameovergong = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\gameover.wav");//必殺技音読み込み
+        SoundPlayer gong = new SoundPlayer(@"C:\UIimg\gong.wav"); //ゴング音の読み込み
+        SoundPlayer attack = new SoundPlayer(@"c:\UIimg\attack.wav");//アタック音声読み込み
+        SoundPlayer guard = new SoundPlayer(@"c:\UIimg\guard.wav");//ガード音読み込み
+        SoundPlayer jutsu = new SoundPlayer(@"c:\UIimg\jutsu.wav");//必殺技音読み込み
+        SoundPlayer gameovergong = new SoundPlayer(@"c:\UIimg\gameover.wav");//必殺技音読み込み
 
 
 
@@ -71,7 +71,6 @@ namespace FFgameUI
 
         private async void button1_Click(object sender, EventArgs e) //スタートボタンで初期化
         {
-            
             progressBar1.Value = 100; //player1 HP
             progressBar2.Value = 100; //player2 HP
             progressBar3.Value = 0; //player1 MP
@@ -184,13 +183,13 @@ namespace FFgameUI
             {
                 jutsu.Play();
                 showImage1 = player1Image[3];
-                panel1.Invalidate();
+                panel2.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
                 });
                 showImage2 = player2Image[4];
-                panel1.Invalidate();
+                panel3.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
@@ -203,13 +202,13 @@ namespace FFgameUI
             {
                 jutsu.Play();
                 showImage2 = player2Image[3];
-                panel1.Invalidate();
+                panel3.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
                 });
                 showImage1 = player1Image[4];
-                panel1.Invalidate();
+                panel2.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
@@ -226,36 +225,36 @@ namespace FFgameUI
                     {
                         attack.Play();
                         showImage1 = player1Image[1];
-                        panel1.Invalidate();
+                        panel2.Invalidate();
                         await Task.Run(() =>
                         {
                             Thread.Sleep(150);
                         });
                         showImage1 = player1Image[0];
-                        panel1.Invalidate();
+                        panel2.Invalidate();
 
                         if (B_move == "normal") // B normal
                         {
                             showImage2 = player2Image[4];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage2 = player2Image[0];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                         }
                         if (B_move == "guard") // B guard
                         {
                             guard.Play();
                             showImage2 = player2Image[2];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage2 = player2Image[0];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                         }
 
                     }
@@ -263,36 +262,36 @@ namespace FFgameUI
                     {
                         attack.Play();
                         showImage2 = player2Image[1];
-                        panel1.Invalidate();
+                        panel3.Invalidate();
                         await Task.Run(() =>
                         {
                             Thread.Sleep(150);
                         });
                         showImage2 = player2Image[0];
-                        panel1.Invalidate();
+                        panel3.Invalidate();
 
                         if (A_move == "guard") // A guard
                         {
                             guard.Play();
                             showImage1 = player1Image[2];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage1 = player1Image[0];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                         }
                         if (A_move == "normal") // A normal
                         {
                             showImage1 = player1Image[4];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage1 = player1Image[0];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                         }
                     }
                     else //　回避成功
@@ -301,25 +300,25 @@ namespace FFgameUI
                         {
                             attack.Play();
                             showImage1 = player1Image[1];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage1 = player1Image[0];
-                            panel1.Invalidate();
+                            panel2.Invalidate();
                         }
                         if (B_move == "attack") // B attack
                         {
                             attack.Play();
                             showImage2 = player2Image[1];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                             await Task.Run(() =>
                             {
                                 Thread.Sleep(150);
                             });
                             showImage2 = player2Image[0];
-                            panel1.Invalidate();
+                            panel3.Invalidate();
                         }
                     }
                 }
@@ -384,14 +383,14 @@ namespace FFgameUI
                 
                 guard.Play();
                 showImage1 = player1Image[2];
-                panel1.Invalidate();
+                panel2.Invalidate();
                 
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
                 });
                 showImage1 = player1Image[0];
-                panel1.Invalidate();
+                panel2.Invalidate();
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
@@ -422,7 +421,9 @@ namespace FFgameUI
             string player_B_HP = "player_B_HP";
             while (n == 1)
             {
-                if(AccessClass.update(UI, system_update, -1)) // systemのアップデートを確認
+
+                
+                if (AccessClass.update(UI, system_update, -1)) // systemのアップデートを確認
                 {
                     AccessClass.push(system_update, "False");
                     AccessClass.update(UI, system_update, -1);
@@ -434,7 +435,13 @@ namespace FFgameUI
                     update_B_MP(this, EventArgs.Empty);
                 }
                 Application.DoEvents();
+
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(100);
+                });
             }
+
         }
     }
 }
