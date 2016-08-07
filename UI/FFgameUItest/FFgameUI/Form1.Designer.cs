@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -44,13 +45,12 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.panel3);
@@ -71,6 +71,14 @@
             this.panel1.Size = new System.Drawing.Size(1270, 644);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(601, 660);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(309, 100);
+            this.panel4.TabIndex = 16;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // button3
             // 
@@ -104,9 +112,9 @@
             // panel2
             // 
             this.panel2.AutoSize = true;
-            this.panel2.Location = new System.Drawing.Point(122, 143);
+            this.panel2.Location = new System.Drawing.Point(122, 146);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(360, 335);
+            this.panel2.Size = new System.Drawing.Size(360, 332);
             this.panel2.TabIndex = 11;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -215,16 +223,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Player1";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 72, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(601, 660);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 37);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "FINISH!!!";
-             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -257,7 +255,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 

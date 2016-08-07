@@ -29,6 +29,7 @@ namespace FFgameUI
         /// 画像素材の読み込み,各ファイルのパスを自分の環境に合わせて
         /// </summary>
         Image backgroundImage = Image.FromFile(@"C:\UIimg\background2.JPG"); //背景画像読み込み
+        Image finishpanel = Image.FromFile(@"C:\UIimg\finish.PNG");
         Image[] player1Image = new Image[] { //player1の素材
         Image.FromFile(@"C:\UIimg\man.png"), //デフォルト画像
         Image.FromFile(@"C:\UIimg\man14.png"),  //攻撃時
@@ -161,7 +162,8 @@ namespace FFgameUI
         {
             string player_A_move = "player_A_move";
             string player_B_move = "player_B_move";
-            if(AccessClass.pull(player_A_move)== "gurd" && AccessClass.pull(player_B_move) == "attack") //Aガード、Aアタック時の描画
+            string judge = "judge";
+            if(AccessClass.pull(player_A_move)== "guard" && AccessClass.pull(player_B_move) == "attack") //Aガード、Aアタック時の描画
             {
                 guard.Play();
                 showImage1 = player1Image[2];
@@ -175,7 +177,7 @@ namespace FFgameUI
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
             }
-            else if (AccessClass.pull(player_B_move) == "gurd" && AccessClass.pull(player_A_move)=="attack") // Bガード、Aアタック時の描画
+            else if (AccessClass.pull(player_B_move) == "guard" && AccessClass.pull(player_A_move)=="attack") // Bガード、Aアタック時の描画
             {
                 guard.Play();
                 showImage2 = player2Image[2];
@@ -189,7 +191,47 @@ namespace FFgameUI
                 showImage1 = player1Image[0];
                 panel1.Invalidate();
             }
+            else if(AccessClass.pull(player_A_move) == "jutsu") // A 必殺技時の描画
+            {
+                jutsu.Play();
+                showImage1 = player1Image[3];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage2 = player2Image[4];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage1 = player1Image[0];
+                showImage2 = player2Image[0];
+                panel1.Invalidate();
 
+            }
+            else if (AccessClass.pull(player_B_move) == "jutsu") // B 必殺技時の描画
+            {
+                jutsu.Play();
+                showImage2 = player2Image[3];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage1 = player1Image[4];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage1 = player1Image[0];
+                showImage2 = player2Image[0];
+                panel1.Invalidate();
+
+
+            }
             else if (AccessClass.pull(player_A_move) == "attack" && AccessClass.pull(player_B_move) == "attack") // A　B　アタック時の描画 
             {
                 attack.Play();
@@ -204,7 +246,7 @@ namespace FFgameUI
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
             }
-            else if (AccessClass.pull(player_A_move) == "attack") // A アタック時の描画
+            else if (AccessClass.pull(player_A_move) == "attack"　&& AccessClass.pull(judge) == "True") // A アタック成功時の描画
             {
                 attack.Play();
                 showImage1 = player1Image[1];
@@ -223,7 +265,7 @@ namespace FFgameUI
                 showImage2 = player2Image[0];
                 panel1.Invalidate(); 
             }
-            else if(AccessClass.pull(player_B_move)== "attack") // B　アタック時の描画
+            else if(AccessClass.pull(player_B_move)== "attack" && AccessClass.pull(judge) == "True") // B　アタック時の描画
             {
                 attack.Play();
                 showImage2 = player2Image[1];
@@ -234,7 +276,10 @@ namespace FFgameUI
                 });
                 showImage1 = player1Image[4];
                 panel1.Invalidate();
-                
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
@@ -247,9 +292,12 @@ namespace FFgameUI
             string game_state = "game_state";
             if (AccessClass.pull(game_state) == "game_over") // game_stateがgame_overで実行
             {
-                
-                label7.ForeColor = System.Drawing.Color.DarkRed;
-                this.label7.Location = new Point(443, 280);
+
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(300);
+                });
+                this.panel4.Location = new Point(450, 280);
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
@@ -257,8 +305,10 @@ namespace FFgameUI
                 gameovergong.Play();
                 await Task.Run(() =>
                 {
-                    Thread.Sleep(150);
+                    Thread.Sleep(5000);
                 });
+                this.panel4.Location = new Point(450, 660);
+
 
             }
 
@@ -302,7 +352,15 @@ namespace FFgameUI
                 panel1.Invalidate();
         }
 
-        
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+            if (finishpanel != null)
+            {
+                //DrawImageメソッドで画像を座標(0, 0)の位置に表示する
+                e.Graphics.DrawImage(finishpanel,
+                    0, 0, finishpanel.Width * 2 / 5, finishpanel.Height * 2 / 5);
+            }
+        }
     }
     public class Update_A_HP //player A HPのupdateイベントクラス <- ゲーム中のUI描画制御
     {
