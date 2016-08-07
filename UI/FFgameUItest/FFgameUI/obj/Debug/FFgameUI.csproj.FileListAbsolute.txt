@@ -17,23 +17,3 @@ C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Properties.Resources.resources
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csproj.GenerateResource.Cache
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form2.resources
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.exe.config
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.exe
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.pdb
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.exe
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.pdb
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csprojResolveAssemblyReference.cache
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form1.resources
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form2.resources
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Properties.Resources.resources
-C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csproj.GenerateResource.Cache
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.exe.config
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.exe
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.pdb
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.exe
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\bin\Debug\FFgameUI.pdb
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csprojResolveAssemblyReference.cache
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form1.resources
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form2.resources
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Properties.Resources.resources
-C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csproj.GenerateResource.Cache
