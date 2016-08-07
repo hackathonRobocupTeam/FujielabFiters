@@ -6,7 +6,7 @@
 ###########################
 
 from threading import Thread
-import datetime
+# import datetime
 import time
 import copy
 import BaseHTTPServer
@@ -74,9 +74,10 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 modules[module].update({status_name: return_UNIX_time()})
             if paramater['time'] != "-1":
                 time.sleep(float(paramater['time']))
-            else : # 更新があるまでストップ
-                while True:
-                    if time_stamps[status_name] != modules[module][status_name]: return True
+            else : # 更新があるまでストップしたい
+                # while True:
+                #    if time_stamps[status_name] != modules[module][status_name]: return True
+                pass
             # time_stampの比較
             if modules[module][status_name] < time_stamps[status_name]:
                 modules[module][status_name] = copy.deepcopy(time_stamps[status_name])
@@ -90,10 +91,7 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
            return False
 
 def return_UNIX_time():
-    now = datetime.datetime.now()
-    res = int(time.mktime(now.timetuple()))
-    print "unix_time:", res
-    return res
+    return time.time()
 
 
 def makeHttpServer(IP=None):
