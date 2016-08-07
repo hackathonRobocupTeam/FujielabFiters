@@ -69,13 +69,14 @@ namespace RootSysytem
         }
         static bool player_manager()
         {
+            // 回避したか否か
             if (!(judge_check())) return false;
             string who = who_attack();
             if(who == "err")
             {
                 Console.WriteLine("err!!\n");
                 return false;
-            } 
+            }
             else if (who == "double")
             {
                 damage("A");
@@ -108,6 +109,7 @@ namespace RootSysytem
                     AccessClass.push("player_B_HP", HP_B.ToString());
                     return true;
                 }
+                if (AccessClass.pull("player_B_move") == "gurd") HP_B = HP_B + 9;
                 HP_B = HP_B - 9;
                 MP_A = MP_A + 10;
                 MP_A = MP_A + 15;
@@ -124,9 +126,16 @@ namespace RootSysytem
                     AccessClass.push("player_A_HP", HP_A.ToString());
                     return true;
                 }
+                if (AccessClass.pull("player_A_move") == "gurd") HP_A = HP_A + 9;
                 HP_A = HP_A - 9;
                 MP_B = MP_B + 15;
                 MP_A = MP_A + 10;
+            }
+            if (MP_A >= 100){
+                MP_A = 100;
+            }
+            if (MP_B >= 100){
+                MP_B = 100;
             }
             AccessClass.push("player_A_MP", MP_A.ToString());
             AccessClass.push("player_A_HP", HP_A.ToString());
