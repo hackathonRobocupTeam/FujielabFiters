@@ -109,7 +109,7 @@ namespace RootSysytem
                     AccessClass.push("player_B_HP", HP_B.ToString());
                     return true;
                 }
-                if (AccessClass.pull("player_B_move") == "gurd") HP_B = HP_B + 9;
+                if (AccessClass.pull("player_B_move") == "guard") HP_B = HP_B + 9;
                 HP_B = HP_B - 9;
                 MP_A = MP_A + 10;
                 MP_A = MP_A + 15;
@@ -126,7 +126,7 @@ namespace RootSysytem
                     AccessClass.push("player_A_HP", HP_A.ToString());
                     return true;
                 }
-                if (AccessClass.pull("player_A_move") == "gurd") HP_A = HP_A + 9;
+                if (AccessClass.pull("player_A_move") == "guard") HP_A = HP_A + 9;
                 HP_A = HP_A - 9;
                 MP_B = MP_B + 15;
                 MP_A = MP_A + 10;
