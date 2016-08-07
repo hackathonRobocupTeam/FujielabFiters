@@ -29,6 +29,7 @@ namespace RootSysytem
             {
                 __init__();
             }
+            AccessClass.push(game_state, "battle");
             event_manager();
             // ゲーム終了時の処理
             AccessClass.push(game_state, "game_over");
@@ -63,7 +64,7 @@ namespace RootSysytem
                 {
                     continue;
                 }
-                AccessClass.push("system_update", "true");
+                AccessClass.push("system_update", "True");
             }
         }
         static bool player_manager()
