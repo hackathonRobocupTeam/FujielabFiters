@@ -163,11 +163,14 @@ namespace FFgameUI
             string player_A_move = "player_A_move";
             string player_B_move = "player_B_move";
             string judge = "judge";
-            if(AccessClass.pull(player_A_move)== "guard" && AccessClass.pull(player_B_move) == "attack") //Aガード、Aアタック時の描画
+            string A_move = AccessClass.pull(player_A_move);
+            string B_move = AccessClass.pull(player_B_move);
+            string Judge = AccessClass.pull(judge);
+            if (A_move == "jutsu" && B_move == "jutsu") //　A B jutsu
             {
-                guard.Play();
-                showImage1 = player1Image[2];
-                showImage2 = player2Image[1];
+                jutsu.Play();
+                showImage1 = player1Image[3];
+                showImage2 = player2Image[3];
                 panel1.Invalidate();
                 await Task.Run(() =>
                 {
@@ -177,21 +180,7 @@ namespace FFgameUI
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
             }
-            else if (AccessClass.pull(player_B_move) == "guard" && AccessClass.pull(player_A_move)=="attack") // Bガード、Aアタック時の描画
-            {
-                guard.Play();
-                showImage2 = player2Image[2];
-                showImage1 = player1Image[1];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage2 = player2Image[0];
-                showImage1 = player1Image[0];
-                panel1.Invalidate();
-            }
-            else if(AccessClass.pull(player_A_move) == "jutsu") // A 必殺技時の描画
+            else if (A_move == "jutsu") // A justu
             {
                 jutsu.Play();
                 showImage1 = player1Image[3];
@@ -209,9 +198,8 @@ namespace FFgameUI
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
-
             }
-            else if (AccessClass.pull(player_B_move) == "jutsu") // B 必殺技時の描画
+            else if (B_move == "jutsu") // B jutsu
             {
                 jutsu.Play();
                 showImage2 = player2Image[3];
@@ -229,61 +217,113 @@ namespace FFgameUI
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
+            }
+            else
+            {
+                if (Judge == "False") //　回避失敗
+                {
+                    if (A_move == "attack") // A attack
+                    {
+                        attack.Play();
+                        showImage1 = player1Image[1];
+                        panel1.Invalidate();
+                        await Task.Run(() =>
+                        {
+                            Thread.Sleep(150);
+                        });
+                        showImage1 = player1Image[0];
+                        panel1.Invalidate();
 
+                        if (B_move == "normal") // B normal
+                        {
+                            showImage2 = player2Image[4];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage2 = player2Image[0];
+                            panel1.Invalidate();
+                        }
+                        if (B_move == "guard") // B guard
+                        {
+                            showImage2 = player2Image[2];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage2 = player2Image[0];
+                            panel1.Invalidate();
+                        }
+
+                    }
+                    if (B_move == "attack") // B attack
+                    {
+                        attack.Play();
+                        showImage2 = player2Image[1];
+                        panel1.Invalidate();
+                        await Task.Run(() =>
+                        {
+                            Thread.Sleep(150);
+                        });
+                        showImage2 = player2Image[0];
+                        panel1.Invalidate();
+
+                        if (A_move == "guard") // A guard
+                        {
+                            showImage1 = player1Image[2];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage1 = player1Image[0];
+                            panel1.Invalidate();
+                        }
+                        if (A_move == "normal") // A normal
+                        {
+                            showImage1 = player1Image[4];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage1 = player1Image[0];
+                            panel1.Invalidate();
+                        }
+                    }
+                    else //　回避成功
+                    {
+                        if (A_move == "attack") // A attack
+                        {
+                            attack.Play();
+                            showImage1 = player1Image[1];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage1 = player1Image[0];
+                            panel1.Invalidate();
+                        }
+                        if (B_move == "attack") // B attack
+                        {
+                            attack.Play();
+                            showImage2 = player2Image[1];
+                            panel1.Invalidate();
+                            await Task.Run(() =>
+                            {
+                                Thread.Sleep(150);
+                            });
+                            showImage2 = player2Image[0];
+                            panel1.Invalidate();
+                        }
+                    }
+                }
 
             }
-            else if (AccessClass.pull(player_A_move) == "attack" && AccessClass.pull(player_B_move) == "attack") // A　B　アタック時の描画 
-            {
-                attack.Play();
-                showImage1 = player1Image[1];
-                showImage2 = player2Image[1];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage1 = player1Image[0];
-                showImage2 = player2Image[0];
-                panel1.Invalidate();
-            }
-            else if (AccessClass.pull(player_A_move) == "attack"　&& AccessClass.pull(judge) == "True") // A アタック成功時の描画
-            {
-                attack.Play();
-                showImage1 = player1Image[1];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage2 = player2Image[4];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage1 = player1Image[0];
-                showImage2 = player2Image[0];
-                panel1.Invalidate(); 
-            }
-            else if(AccessClass.pull(player_B_move)== "attack" && AccessClass.pull(judge) == "True") // B　アタック時の描画
-            {
-                attack.Play();
-                showImage2 = player2Image[1];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage1 = player1Image[4];
-                panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
-                showImage1 = player1Image[0];
-                showImage2 = player2Image[0];
-                panel1.Invalidate();
-            }
+            
             
         }
 
