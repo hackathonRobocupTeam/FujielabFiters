@@ -26,9 +26,10 @@ namespace KinectConsole
         public static void Main(string[] args)
         {
             Tracking tracking = new Tracking();
-            tracking.START();
-            Console.Write("Fight!!!");
 
+            Console.Write("Leady....");
+            tracking.START();
+            
             while (true)
             {
 
@@ -83,7 +84,6 @@ namespace KinectConsole
         public void START()
         {
 
-            Console.Write("Leady...");
 
 
             //kinectSensor1の値を、接続されているKinectの一番目に接続する
@@ -130,6 +130,10 @@ namespace KinectConsole
 
             //Kinect2台目の起動
             this.kinectSensor2.Start();
+
+            Console.Write("Fight!!!");
+            AccessClass.push("game_state", "setup");
+
         }
 
 
@@ -191,7 +195,7 @@ namespace KinectConsole
                             AttackJudge("player1", player2, kobusi1, guard2);
 
                         #region utility
-                        //AccessClass.push("player_A_move", what_move());
+                        AccessClass.push("player_A_move", what_move1());
                         //Console.WriteLine(what_move1()); 
                         #endregion
                        
@@ -271,7 +275,7 @@ namespace KinectConsole
 
 
                         #region utility
-                        //AccessClass.push("player_A_move", what_move());
+                        AccessClass.push("player_B_move", what_move2());
                         //Console.WriteLine(what_move2());
                         #endregion
 
@@ -294,7 +298,7 @@ namespace KinectConsole
             if (jutsu1)
             {
                 // TODO: 統合の時コメントアウト解除
-                //AccessClass.push("judge", "True");
+                AccessClass.push("judge", "True");
                 return "jutsu";
             }
             if (attack1) return "attack";
@@ -312,7 +316,7 @@ namespace KinectConsole
             if (jutsu2)
             {
                 // TODO: 統合の時コメントアウト解除
-                //AccessClass.push("judge", "True");
+                AccessClass.push("judge", "True");
                 return "jutsu";
             }
             if (attack2) return "attack";
@@ -353,7 +357,7 @@ namespace KinectConsole
 
             //Console.ReadKey(); //自動で終わらないようにする 
 
-            //AccessClass.push("judge", result.ToString());
+            AccessClass.push("judge", result.ToString());
 
         }
 

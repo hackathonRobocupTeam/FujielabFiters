@@ -28,27 +28,27 @@ namespace FFgameUI
         /// <summary>
         /// 画像素材の読み込み,各ファイルのパスを自分の環境に合わせて
         /// </summary>
-        Image backgroundImage = Image.FromFile(@"UIimg\background2.JPG"); //背景画像読み込み
-        Image finishpanel = Image.FromFile(@"UIimg\finish.PNG");
+        Image backgroundImage = Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\background2.JPG"); //背景画像読み込み
+        Image finishpanel = Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\finish.PNG");
         Image[] player1Image = new Image[] { //player1の素材
-        Image.FromFile(@"UIimg\man.png"), //デフォルト画像
-        Image.FromFile(@"UIimg\man14.png"),  //攻撃時
-        Image.FromFile(@"UIimg\man11.png"),   //ガード時
-        Image.FromFile(@"UIimg\man13.png"),  //必殺技
-        Image.FromFile(@"UIimg\man22.png")};  //ダメージ
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man.png"), //デフォルト画像
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man14.png"),  //攻撃時
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man11.png"),   //ガード時
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man13.png"),  //必殺技
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\man22.png")};  //ダメージ
     Image showImage1;
         Image[] player2Image = new Image[] { //player2の素材
-        Image.FromFile(@"UIimg\2man.png"), //デフォルト画像
-        Image.FromFile(@"UIimg\2man14.png"),  //攻撃時
-        Image.FromFile(@"UIimg\2man11.png"),   //ガード時
-        Image.FromFile(@"UIimg\2man13.png"), //必殺技
-        Image.FromFile(@"UIimg\2man22.png")};  //ダメージ
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man.png"), //デフォルト画像
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man14.png"),  //攻撃時
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man11.png"),   //ガード時
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man13.png"), //必殺技
+        Image.FromFile(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\2man22.png")};  //ダメージ
     Image showImage2;
-        SoundPlayer gong = new SoundPlayer(@"UIimg\gong.wav"); //ゴング音の読み込み
-        SoundPlayer attack = new SoundPlayer(@"UIimg\attack.wav");//アタック音声読み込み
-        SoundPlayer guard = new SoundPlayer(@"UIimg\guard.wav");//ガード音読み込み
-        SoundPlayer jutsu = new SoundPlayer(@"UIimg\jutsu.wav");//必殺技音読み込み
-        SoundPlayer gameovergong = new SoundPlayer(@"UIimg\gameover.wav");//必殺技音読み込み
+        SoundPlayer gong = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\gong.wav"); //ゴング音の読み込み
+        SoundPlayer attack = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\attack.wav");//アタック音声読み込み
+        SoundPlayer guard = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\guard.wav");//ガード音読み込み
+        SoundPlayer jutsu = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\jutsu.wav");//必殺技音読み込み
+        SoundPlayer gameovergong = new SoundPlayer(@"C:\Users\jakky_2\Documents\huck\UI\FFgameUItest\FFgameUI\UIimg\gameover.wav");//必殺技音読み込み
 
 
 
