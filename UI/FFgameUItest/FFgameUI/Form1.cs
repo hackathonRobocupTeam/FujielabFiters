@@ -17,6 +17,7 @@ namespace FFgameUI
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +46,12 @@ namespace FFgameUI
         SoundPlayer gong = new SoundPlayer(@"C:\UIimg\gong.wav"); //ゴング音の読み込み
         SoundPlayer attack = new SoundPlayer(@"c:\UIimg\attack.wav");//アタック音声読み込み
         SoundPlayer guard = new SoundPlayer(@"c:\UIimg\guard.wav");//ガード音読み込み
+        SoundPlayer jutsu = new SoundPlayer(@"c:\UIimg\jutsu.wav");//必殺技音読み込み
+        SoundPlayer gameovergong = new SoundPlayer(@"c:\UIimg\gameover.wav");//必殺技音読み込み
+
+
+
+
 
 
         private void panel1_Paint(object sender, PaintEventArgs e) //背景画像表示
@@ -81,18 +88,22 @@ namespace FFgameUI
             });
             button1.Text = "START";
 
-            Update_A_HP update_a_hp = new Update_A_HP();
+            Update_A_HP update_a_hp = new Update_A_HP(); // Update_A_HPクラスインスタンスを作成
 
+            update_a_hp.systemstate += new EventHandler(this.gameover);　
             update_a_hp.update_A_HP += new EventHandler(this.A_HPupdate);
             update_a_hp.update_B_HP += new EventHandler(this.B_HPupdate);
-            update_a_hp.Start();
+            update_a_hp.drow += new EventHandler(this.drow);
+            update_a_hp.update_A_MP += new EventHandler(this.A_MPupdate);
+            update_a_hp.update_B_MP += new EventHandler(this.B_MPupdate);
+
+            update_a_hp.Start(); //　Update_A_HPイベント実行
 
 
         }
 
         private async void A_HPupdate(object sender, System.EventArgs e) //playerAのHP,MP更新
         {
-            drow();
             string player_A_HP = "player_A_HP";
             progressBar1.Value = int.Parse(AccessClass.pull(player_A_HP));
             
@@ -100,10 +111,19 @@ namespace FFgameUI
         }
         private async void B_HPupdate(object sender, System.EventArgs e) //playerBのHP,MP更新
         {
-            drow();
             string player_B_HP = "player_B_HP";
             progressBar2.Value = int.Parse(AccessClass.pull(player_B_HP));
             
+        }
+        private async void A_MPupdate(object sender, System.EventArgs e) //playerAのMP更新
+        {
+            string player_A_MP = "player_A_MP";
+            progressBar3.Value = int.Parse(AccessClass.pull(player_A_MP));
+        }
+        private async void B_MPupdate(object sender, System.EventArgs e) //playerBのMP更新
+        {
+            string player_B_MP = "player_B_MP";
+            progressBar4.Value = int.Parse(AccessClass.pull(player_B_MP));
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e) //player1の画像表示
@@ -137,14 +157,62 @@ namespace FFgameUI
             }
         }
 
-       public async void drow()
+       public async void drow(object sender, System.EventArgs e) // キャラクター描画、音声再生の関数
         {
             string player_A_move = "player_A_move";
             string player_B_move = "player_B_move";
-            if (AccessClass.pull(player_A_move) == "attack") // A アタック時の描画
+            if(AccessClass.pull(player_A_move)== "gurd" && AccessClass.pull(player_B_move) == "attack") //Aガード、Aアタック時の描画
+            {
+                guard.Play();
+                showImage1 = player1Image[2];
+                showImage2 = player2Image[1];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage1 = player1Image[0];
+                showImage2 = player2Image[0];
+                panel1.Invalidate();
+            }
+            else if (AccessClass.pull(player_B_move) == "gurd" && AccessClass.pull(player_A_move)=="attack") // Bガード、Aアタック時の描画
+            {
+                guard.Play();
+                showImage2 = player2Image[2];
+                showImage1 = player1Image[1];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage2 = player2Image[0];
+                showImage1 = player1Image[0];
+                panel1.Invalidate();
+            }
+
+            else if (AccessClass.pull(player_A_move) == "attack" && AccessClass.pull(player_B_move) == "attack") // A　B　アタック時の描画 
             {
                 attack.Play();
                 showImage1 = player1Image[1];
+                showImage2 = player2Image[1];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+                showImage1 = player1Image[0];
+                showImage2 = player2Image[0];
+                panel1.Invalidate();
+            }
+            else if (AccessClass.pull(player_A_move) == "attack") // A アタック時の描画
+            {
+                attack.Play();
+                showImage1 = player1Image[1];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
                 showImage2 = player2Image[4];
                 panel1.Invalidate();
                 await Task.Run(() =>
@@ -155,34 +223,45 @@ namespace FFgameUI
                 showImage2 = player2Image[0];
                 panel1.Invalidate(); 
             }
-            if(AccessClass.pull(player_B_move)== "attack")
+            else if(AccessClass.pull(player_B_move)== "attack") // B　アタック時の描画
             {
                 attack.Play();
+                showImage2 = player2Image[1];
+                panel1.Invalidate();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
                 showImage1 = player1Image[4];
-                showImage2 = player2Image[1];
                 panel1.Invalidate();
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(150);
-                });
+                
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
                 panel1.Invalidate();
             }
-            if(AccessClass.pull(player_A_move)=="attack" && AccessClass.pull(player_B_move) == "attack")
+            
+        }
+
+        private async void gameover(object sender, EventArgs e)  //ゲーム終了時の描画
+        {
+            string game_state = "game_state";
+            if (AccessClass.pull(game_state) == "game_over") // game_stateがgame_overで実行
             {
-                attack.Play();
-                showImage1 = player1Image[1];
-                showImage2 = player2Image[1];
-                panel1.Invalidate();
+                
+                label7.ForeColor = System.Drawing.Color.DarkRed;
+                this.label7.Location = new Point(443, 280);
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
                 });
-                showImage1 = player1Image[0];
-                showImage2 = player2Image[0];
-                panel1.Invalidate();
+                gameovergong.Play();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(150);
+                });
+
             }
+
         }
 
 
@@ -222,11 +301,17 @@ namespace FFgameUI
                 showImage1 = player1Image[0];
                 panel1.Invalidate();
         }
+
+        
     }
-    public class Update_A_HP //player A HPのupdateイベントクラス
+    public class Update_A_HP //player A HPのupdateイベントクラス <- ゲーム中のUI描画制御
     {
         public event EventHandler update_A_HP;
         public event EventHandler update_B_HP;
+        public event EventHandler drow;
+        public event EventHandler update_A_MP;
+        public event EventHandler update_B_MP;
+        public event EventHandler systemstate;
 
         public async void Start()
         {
@@ -241,8 +326,12 @@ namespace FFgameUI
                 {
                     AccessClass.push(system_update, "False");
                     AccessClass.update(UI, system_update, -1);
+                    systemstate(this, EventArgs.Empty);
                     update_A_HP(this, EventArgs.Empty);   // 更新があるとイベント発生
-                    update_B_HP(this, EventArgs.Empty);  
+                    update_B_HP(this, EventArgs.Empty);
+                    drow(this, EventArgs.Empty);
+                    update_A_MP(this, EventArgs.Empty);
+                    update_B_MP(this, EventArgs.Empty);
                 }
                 Application.DoEvents();
             }

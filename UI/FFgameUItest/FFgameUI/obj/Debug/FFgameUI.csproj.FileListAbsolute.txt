@@ -16,3 +16,4 @@ C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form1.resources
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Properties.Resources.resources
 C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.csproj.GenerateResource.Cache
+C:\Users\mamoru\Documents\Visual Studio 2015\Projects\FFgameUItest\FFgameUI\obj\Debug\FFgameUI.Form2.resources
