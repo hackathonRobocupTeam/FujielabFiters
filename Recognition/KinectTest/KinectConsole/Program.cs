@@ -261,16 +261,34 @@ namespace KinectConsole
             
             bool result = false;
 
-            if (player2[kobusi] == 1) {
+            if (player2[kobusi]==1) {
                 result = true;
             }
-            
+
+            /*
+            //int count = 0;
+            for (int x = 0; x < 320 * 240; x++)   //配列の中身全回し
+            {
+                if (player2[x] == 1)
+                {
+                        pos[m] = x;
+                        //Console.Write("{0}\t", pos[m]);
+                        m++;
+                }
+            }
+            for (count = 0; count < m; count++)
+            {
+                if (kobusi == pos[count])    //当たったらresultを0にする
+                {
+                    result = true;
+                }
+            }
+            */
 
             if (guard == true)         //ガードされたらredultを0にする
             {
                 result = false;
             }
-
             Console.Write(">{0}", result);
             //Console.ReadKey(); //自動で終わらないようにする 
             AccessClass.push("Judge",result.ToString());
