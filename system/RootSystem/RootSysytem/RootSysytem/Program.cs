@@ -53,18 +53,22 @@ namespace RootSysytem
         static void event_manager()
         {
             bool game_over = false;
+            string A_MOVE;
+            string B_MOVE;
             // game overじゃなきゃループ
             while (!(game_over))
             {
                 Thread.Sleep(100);
                 if (AccessClass.update(module_name, "player_A_move", -1) || AccessClass.update(module_name, "player_B_move", -1))
                 {
-                    if (!(attack_check()))
+                    A_MOVE = AccessClass.pull("player_A_move");
+                    B_MOVE = AccessClass.pull("player_B_move");
+                    if (!(attack_check(A_MOVE, B_MOVE)))
                     { // attack or jutsuじゃなきゃHPは変動しない
                         break;
                     }
                     // HPが0になったらtrueを返す
-                    game_over = player_manager();
+                    game_over = player_manager(A_MOVE, B_MOVE);
                 }
                 else
                 {
@@ -73,11 +77,11 @@ namespace RootSysytem
                 AccessClass.push("system_update", "True");
             }
         }
-        static bool player_manager()
+        static bool player_manager(string A_MOVE, string B_MOVE)
         {
             // 回避したか否か
             if (!(judge_check())) return false;
-            string who = who_attack();
+            string who = who_attack(A_MOVE, B_MOVE);
             if(who == "err")
             {
                 Console.WriteLine("err!!\n");
@@ -85,26 +89,24 @@ namespace RootSysytem
             }
             else if (who == "double")
             {
-                damage("A");
-                damage("B");
+                damage("A", A_MOVE, B_MOVE);
+                damage("B", A_MOVE, B_MOVE);
             }
             else
             {
-                damage(who);
+                damage(who, A_MOVE, B_MOVE);
             }
             if (AccessClass.pull("player_A_HP") == "0" || AccessClass.pull("player_B_HP") == "0") return true;
             return false;
         }
         // ifの中で終了したいためbool型にしている。よりよい方法知ってたら教えて 
-        static bool damage(string who)
+        static bool damage(string who, string A_MOVE, string B_MOVE)
         {
             int HP_A = int.Parse(AccessClass.pull("player_A_HP"));
             int HP_B = int.Parse(AccessClass.pull("player_B_HP"));
             int MP_A = int.Parse(AccessClass.pull("player_A_MP"));
             int MP_B = int.Parse(AccessClass.pull("player_B_MP"));
-            string A_MOVE = AccessClass.pull("player_A_move");
-            string B_MOVE = AccessClass.pull("player_B_move");
-            Console.WriteLine("A:{0}, B:{0}", HP_A, HP_B);
+           Console.WriteLine("A:{0}, B:{0}", HP_A, HP_B);
             if (who == "A")
             {
                 if (A_MOVE == "jutsu")
@@ -159,20 +161,16 @@ namespace RootSysytem
             if (AccessClass.pull("judge") == "True") return true;
             return false;
         }
-        static bool attack_check()
+        static bool attack_check(string A_MOVE, string B_MOVE)
         {
-            string A_MOVE = AccessClass.pull("player_A_move");
-            string B_MOVE = AccessClass.pull("player_B_move");
             if (A_MOVE == "jutsu") return true;
             if (B_MOVE == "jutsu") return true;
             if (A_MOVE == "attack") return true;
             if (B_MOVE == "attack") return true;
             return false;
         }
-        static string who_attack()
+        static string who_attack(string A_MOVE, string B_MOVE)
         {
-            string A_MOVE = AccessClass.pull("player_A_move");
-            string B_MOVE = AccessClass.pull("player_B_move");
             if (A_MOVE == "attack" && B_MOVE == "attack" ) return "double";
             else if (A_MOVE == "jutsu" && B_MOVE == "jutsu" ) return "double";
             else if (A_MOVE == "jutsu") return "A";
