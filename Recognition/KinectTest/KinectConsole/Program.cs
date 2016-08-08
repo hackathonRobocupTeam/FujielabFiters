@@ -511,7 +511,7 @@ namespace KinectConsole
         public void GuardChecker(string player,Skeleton skeleton)
         {
             //Console.WriteLine("腕：{0},頭：{1}", skeleton.Joints[JointType.HandLeft].Position.Z, skeleton.Joints[JointType.Head].Position.Z);
-
+            /*
             //腕と肘の距離
             if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.ElbowLeft].Position.Z) <= 0.1 
                 && skeleton.Joints[JointType.HandLeft].Position.Z + 0.25  <= skeleton.Joints[JointType.Head].Position.Z)
@@ -536,15 +536,17 @@ namespace KinectConsole
             }
 
             //両手の距離差が少ないとき
-            else if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z) <= 0.03 
-                && skeleton.Joints[JointType.HandLeft].Position.Z + 0.25 <= skeleton.Joints[JointType.Head].Position.Z)
+            else 
+            */
+            if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z) <= 0.03 
+                && (skeleton.Joints[JointType.HandLeft].Position.Z + skeleton.Joints[JointType.HandRight].Position.Z)/2 + 0.2 <= skeleton.Joints[JointType.Head].Position.Z)
             {
                 if (player == "player1") { guard1 = true; }
 
                 else if (player == "player2") { guard2 = true; }
 
 
-                Console.WriteLine(player + "Guarded!:guard3");
+                Console.WriteLine(player + "Guarded!:guard");
             }
             else
             {
