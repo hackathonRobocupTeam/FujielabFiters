@@ -88,6 +88,11 @@ namespace FFgameUI
             });
             button1.Text = "START";
 
+            if (AccessClass.pull("game_state") == "start")
+            {
+                AccessClass.push("game_state", "setup");
+            }
+
             Update_A_HP update_a_hp = new Update_A_HP(); // Update_A_HPクラスインスタンスを作成
 
             update_a_hp.systemstate += new EventHandler(this.gameover);

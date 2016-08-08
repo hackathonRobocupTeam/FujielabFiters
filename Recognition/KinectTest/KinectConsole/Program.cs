@@ -322,24 +322,32 @@ namespace KinectConsole
         /// <param name="player2"></param>
         /// <param name="kobusi"></param>
         /// <param name="guard"></param>
-        public void AttackJudge(string hito,int[] player2, int kobusi, bool guard)
+        public void AttackJudge(string hito,int[] R_Player, int kobusi, bool guard)
         {
-            int[] pos = new int[640*480];  //プレイヤーの領域
-            
 
             bool result = false;
-                        
-            if (player2[kobusi] == 1)
+
+            if (kobusi > R_Player.Length)
             {
-                result = true;
+                result = false;
             }
+            else if (kobusi < 0)
+            {
+                result = false;
+            }
+            else
+            {
+                if (R_Player[kobusi] == 1)
+                {
+                    result = true;
+                }
+
+                //Console.WriteLine(hito + "Attack >{0}", result);
+
+                //Console.ReadKey(); //自動で終わらないようにする 
+            }
+                AccessClass.push("judge", result.ToString());
             
-            Console.WriteLine(hito+"Attack >{0}", result);
-
-            //Console.ReadKey(); //自動で終わらないようにする 
-
-            AccessClass.push("judge", result.ToString());
-
         }
 
 

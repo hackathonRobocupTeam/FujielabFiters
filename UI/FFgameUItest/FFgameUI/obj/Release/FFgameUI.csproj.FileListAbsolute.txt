@@ -7,3 +7,4 @@ C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.Pro
 C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.csproj.GenerateResource.Cache
 C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.exe
 C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.pdb
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.csprojResolveAssemblyReference.cache

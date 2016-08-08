@@ -3,3 +3,4 @@ C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\bin\Rel
 C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\bin\Release\RootSysytem.pdb
 C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\obj\Release\RootSysytem.exe
 C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\obj\Release\RootSysytem.pdb
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\obj\Release\RootSysytem.csprojResolveAssemblyReference.cache

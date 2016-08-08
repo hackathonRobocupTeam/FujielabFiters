@@ -6,3 +6,4 @@ C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\x64\Rele
 C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\x64\Release\Microsoft.Kinect.xml
 C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\x64\Release\KinectConsole.exe
 C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\x64\Release\KinectConsole.pdb
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\x64\Release\KinectConsole.csprojResolveAssemblyReference.cache
