@@ -28,11 +28,12 @@ namespace RootSysytem
                 Thread.Sleep(50);
                 if (AccessClass.update(module_name, game_state, -1)) break;
                     }
-            //  バトル時の処理
+            //  初期化関数を呼ぶ
             if(AccessClass.pull(game_state) == "setup")
             {
                 __init__();
             }
+            // battle時の処理
             AccessClass.push(game_state, "battle");
             event_manager();
             // ゲーム終了時の処理
@@ -55,14 +56,11 @@ namespace RootSysytem
             // game overじゃなきゃループ
             while (!(game_over))
             {
-                Console.WriteLine(DateTime.Now);
                 Thread.Sleep(100);
                 if (AccessClass.update(module_name, "player_A_move", -1) || AccessClass.update(module_name, "player_B_move", -1))
                 {
-                    // 結構時間かかってるらしい
-                    Console.WriteLine("get move:{0}", DateTime.Now);
                     if (!(attack_check()))
-                    { // attackじゃなきゃHPは変動しない
+                    { // attack or jutsuじゃなきゃHPは変動しない
                         break;
                     }
                     // HPが0になったらtrueを返す
@@ -106,7 +104,7 @@ namespace RootSysytem
             int MP_B = int.Parse(AccessClass.pull("player_B_MP"));
             string A_MOVE = AccessClass.pull("player_A_move");
             string B_MOVE = AccessClass.pull("player_B_move");
-
+            Console.WriteLine("A:{0}, B:{0}", HP_A, HP_B);
             if (who == "A")
             {
                 if (A_MOVE == "jutsu")
