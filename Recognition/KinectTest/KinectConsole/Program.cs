@@ -538,8 +538,8 @@ namespace KinectConsole
             //両手の距離差が少ないとき
             else 
             */
-            if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z) <= 0.03 
-                && (skeleton.Joints[JointType.HandLeft].Position.Z + skeleton.Joints[JointType.HandRight].Position.Z)/2 + 0.2 <= skeleton.Joints[JointType.Head].Position.Z)
+            if (Math.Abs(skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z) <= 0.02 
+                && (skeleton.Joints[JointType.HandLeft].Position.Z + skeleton.Joints[JointType.HandRight].Position.Z)/2 + 0.25 >= skeleton.Joints[JointType.Head].Position.Z)
             {
                 if (player == "player1") { guard1 = true; }
 
