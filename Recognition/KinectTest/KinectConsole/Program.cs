@@ -147,27 +147,21 @@ namespace KinectConsole
         /// <param name="e"></param>
         public void KinectSensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
-            //AllFrameReadyEvebtArgs内から、各要素のフレーム情報を取得することができる
-           /* using (ImageFrame imageFrame = e.OpenColorImageFrame())
-            {
-                Bitmap bmap = ImageToBitmap(1,colorImage1, e.OpenColorImageFrame());
-                GuardGet(bmap);
-            }
-            */
 
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
             {
                 // 深度画像の生データ（PlayerIndexなども入っている）の配列を取得
-                DepthImagePixel[] depthImagePixels = depthFrame.GetRawPixelData();
+                //DepthImagePixel[] depthImagePixels = depthFrame.GetRawPixelData();
 
                 if (depthFrame != null)
                 {
-                    DepthGet("player1", depthImagePixels);
+                    DepthGet("player1", depthFrame.GetRawPixelData());
                 }
                 else
                 {
                     return;
                 }
+            }
 
                 //スケルトンの処理
                 Skeleton[] skeleton = new Skeleton[0];
@@ -206,8 +200,7 @@ namespace KinectConsole
                     //Console.WriteLine("Player1がいません");
                 }
                     
-            }
-
+            
 
 
         }
@@ -222,14 +215,6 @@ namespace KinectConsole
         /// <param name="e"></param>
         public void KinectSensor_AllFramesReady2(object sender, AllFramesReadyEventArgs e)
         {
-            //AllFrameReadyEvebtArgs内から、各要素のフレーム情報を取得することができる
-            /*
-            using (ImageFrame imageFrame = e.OpenColorImageFrame())
-            {
-                Bitmap bmap = ImageToBitmap(2,colorImage2, e.OpenColorImageFrame());
-                GuardGet(bmap);
-            }
-            */
 
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
             {
@@ -244,6 +229,8 @@ namespace KinectConsole
                 {
                     return;
                 }
+
+            }
 
                 //スケルトンの処理
                 Skeleton[] skeleton = new Skeleton[0];
@@ -286,7 +273,7 @@ namespace KinectConsole
                     //Console.WriteLine("Player1がいません");
                 }
 
-            }
+            
         }
 
         /// <summary>
@@ -341,12 +328,6 @@ namespace KinectConsole
             
 
             bool result = false;
-            /*
-            if (player2.Length != 320*240 )
-            {
-                System.Threading.Thread.Sleep(5);
-                }*/
-            //Console.WriteLine("kobusi:{0},player2[kobusi]:{1}", kobusi, player2.Length);
                         
             if (player2[kobusi] == 1)
             {
