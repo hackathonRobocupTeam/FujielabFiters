@@ -106,7 +106,7 @@ namespace RootSysytem
             int HP_B = int.Parse(AccessClass.pull("player_B_HP"));
             int MP_A = int.Parse(AccessClass.pull("player_A_MP"));
             int MP_B = int.Parse(AccessClass.pull("player_B_MP"));
-           Console.WriteLine("A:{0}, B:{0}", HP_A, HP_B);
+            Console.WriteLine("A:{0}, B:{1}", HP_A, HP_B);
             if (who == "A")
             {
                 if (A_MOVE == "jutsu")
