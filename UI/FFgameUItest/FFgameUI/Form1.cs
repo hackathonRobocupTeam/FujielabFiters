@@ -170,14 +170,16 @@ namespace FFgameUI
                 jutsu.Play();
                 showImage1 = player1Image[3];
                 showImage2 = player2Image[3];
-                panel1.Invalidate();
+                panel2.Invalidate();
+                panel3.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150);
                 });
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
-                panel1.Invalidate();
+                panel2.Invalidate();
+                panel3.Invalidate();
             }
             else if (A_move == "jutsu") // A justu
             {
@@ -196,7 +198,8 @@ namespace FFgameUI
                 });
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
-                panel1.Invalidate();
+                panel2.Invalidate();
+                panel3.Invalidate();
             }
             else if (B_move == "jutsu") // B jutsu
             {
@@ -215,7 +218,8 @@ namespace FFgameUI
                 });
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
-                panel1.Invalidate();
+                panel2.Invalidate();
+                panel3.Invalidate();
             }
             else
             {
@@ -366,14 +370,16 @@ namespace FFgameUI
                 progressBar2.Value -= 10;//プログレスバー値入力
                 showImage1 = player1Image[1];//プレイヤー１画像切り替え
                 showImage2 = player2Image[4];//プレイヤー２画像切り替え
-                panel1.Invalidate();// パネル再描画
+                panel2.Invalidate();// パネル再描画
+                panel3.Invalidate();
                 await Task.Run(() =>
                 {
                     Thread.Sleep(150); //150ms? 待機
                 });
                 showImage1 = player1Image[0];
                 showImage2 = player2Image[0];
-                panel1.Invalidate();
+                panel2.Invalidate();
+                panel3.Invalidate();
             }
 
 
