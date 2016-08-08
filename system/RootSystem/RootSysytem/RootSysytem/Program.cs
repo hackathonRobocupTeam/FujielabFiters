@@ -60,6 +60,7 @@ namespace RootSysytem
                 Thread.Sleep(100);
                 if (AccessClass.update(module_name, "player_A_move", -1) || AccessClass.update(module_name, "player_B_move", -1))
                 {
+                    // 結構時間かかってるらしい
                     Console.WriteLine("get move:{0}", DateTime.Now);
                     if (!(attack_check()))
                     { // attackじゃなきゃHPは変動しない
@@ -104,9 +105,12 @@ namespace RootSysytem
             int HP_B = int.Parse(AccessClass.pull("player_B_HP"));
             int MP_A = int.Parse(AccessClass.pull("player_A_MP"));
             int MP_B = int.Parse(AccessClass.pull("player_B_MP"));
+            string A_MOVE = AccessClass.pull("player_A_move");
+            string B_MOVE = AccessClass.pull("player_B_move");
+
             if (who == "A")
             {
-                if (AccessClass.pull("player_A_move") == "jutsu")
+                if (A_MOVE == "jutsu")
                 {
                     if(MP_A > 90)
                     {
@@ -117,14 +121,14 @@ namespace RootSysytem
                     AccessClass.push("player_B_HP", HP_B.ToString());
                     return true;
                 }
-                if (AccessClass.pull("player_B_move") == "guard") HP_B = HP_B + 9;
+                if (B_MOVE == "guard") HP_B = HP_B + 9;
                 HP_B = HP_B - 9;
                 MP_A = MP_A + 10;
                 MP_A = MP_A + 15;
             }
             if (who == "B")
             {
-               if (AccessClass.pull("player_B_move") == "jutsu") {
+               if (B_MOVE == "jutsu") {
                    if (MP_B > 90)
                    {
                         MP_B = 0;
@@ -134,7 +138,7 @@ namespace RootSysytem
                     AccessClass.push("player_A_HP", HP_A.ToString());
                     return true;
                 }
-                if (AccessClass.pull("player_A_move") == "guard") HP_A = HP_A + 9;
+                if (A_MOVE == "guard") HP_A = HP_A + 9;
                 HP_A = HP_A - 9;
                 MP_B = MP_B + 15;
                 MP_A = MP_A + 10;
@@ -158,21 +162,24 @@ namespace RootSysytem
         }
         static bool attack_check()
         {
-            if (AccessClass.pull("player_A_move") == "jutsu") return true;
-            if (AccessClass.pull("player_B_move") == "jutsu") return true;
-            if (AccessClass.pull("player_A_move") == "attack") return true;
-            if (AccessClass.pull("player_B_move") == "attack") return true;
+            string A_MOVE = AccessClass.pull("player_A_move");
+            string B_MOVE = AccessClass.pull("player_B_move");
+            if (A_MOVE == "jutsu") return true;
+            if (B_MOVE == "jutsu") return true;
+            if (A_MOVE == "attack") return true;
+            if (B_MOVE == "attack") return true;
             return false;
         }
         static string who_attack()
         {
-            if (AccessClass.pull("player_A_move") == "attack" && AccessClass.pull("player_B_move") == "attack" ) return "double";
-            else if (AccessClass.pull("player_A_move") == "jutsu" && AccessClass.pull("player_B_move") == "jutsu" ) return "double";
-            else if (AccessClass.pull("player_A_move") == "jutsu") return "A";
-            else if (AccessClass.pull("player_B_move") == "jutsu") return "B";
- 
-            else if (AccessClass.pull("player_A_move") == "attack") return "A";
-            else if (AccessClass.pull("player_B_move") == "attack") return "B";
+            string A_MOVE = AccessClass.pull("player_A_move");
+            string B_MOVE = AccessClass.pull("player_B_move");
+            if (A_MOVE == "attack" && B_MOVE == "attack" ) return "double";
+            else if (A_MOVE == "jutsu" && B_MOVE == "jutsu" ) return "double";
+            else if (A_MOVE == "jutsu") return "A";
+            else if (B_MOVE == "jutsu") return "B";
+            else if (A_MOVE == "attack") return "A";
+            else if (B_MOVE == "attack") return "B";
             // AもBもアタックしてなかったら呼ばれるはずがない
             return "err";
  
