@@ -1,0 +1,8 @@
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\KinectConsole.exe.config
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\KinectConsole.exe
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\KinectConsole.pdb
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\Microsoft.Kinect.dll
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\System.Drawing.dll
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\bin\Release\Microsoft.Kinect.xml
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Release\KinectConsole.exe
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Release\KinectConsole.pdb

@@ -1,0 +1,5 @@
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\bin\Release\RootSysytem.exe.config
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\bin\Release\RootSysytem.exe
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\bin\Release\RootSysytem.pdb
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\obj\Release\RootSysytem.exe
+C:\Users\mamoru\FujielabFiters\system\RootSystem\RootSysytem\RootSysytem\obj\Release\RootSysytem.pdb

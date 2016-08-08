@@ -44,3 +44,5 @@ C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\A
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\Accord.Statistics.xml
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\Accord.Video.xml
 C:\Users\jakky_2\Documents\huck\Recognition\KinectTest\KinectConsole\bin\Debug\Accord.Vision.xml
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.exe
+C:\Users\mamoru\FujielabFiters\Recognition\KinectTest\KinectConsole\obj\Debug\KinectConsole.pdb

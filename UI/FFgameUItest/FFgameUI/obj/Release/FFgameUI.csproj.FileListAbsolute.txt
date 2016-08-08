@@ -1,0 +1,9 @@
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Release\FFgameUI.exe.config
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Release\FFgameUI.exe
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\bin\Release\FFgameUI.pdb
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.Form1.resources
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.Form2.resources
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.Properties.Resources.resources
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.csproj.GenerateResource.Cache
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.exe
+C:\Users\mamoru\FujielabFiters\UI\FFgameUItest\FFgameUI\obj\Release\FFgameUI.pdb
