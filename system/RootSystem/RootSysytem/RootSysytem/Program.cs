@@ -79,6 +79,9 @@ namespace RootSysytem
         }
         static bool player_manager(string A_MOVE, string B_MOVE)
         {
+            int HP_A;
+            int HP_B;
+ 
             // 回避したか否か
             if (!(judge_check())) return false;
             string who = who_attack(A_MOVE, B_MOVE);
@@ -96,7 +99,10 @@ namespace RootSysytem
             {
                 damage(who, A_MOVE, B_MOVE);
             }
-            if (AccessClass.pull("player_A_HP") == "0" || AccessClass.pull("player_B_HP") == "0") return true;
+            HP_A = int.Parse(AccessClass.pull("player_A_HP"));
+            HP_B = int.Parse(AccessClass.pull("player_B_HP"));
+ 
+            if (HP_A == 0 || HP_B == 0) return true;
             return false;
         }
         // ifの中で終了したいためbool型にしている。よりよい方法知ってたら教えて 
