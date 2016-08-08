@@ -94,7 +94,7 @@ namespace RootSysytem
             {
                 damage(who);
             }
-            if (AccessClass.pull("player_A_HP") == "0" || AccessClass.pull("player_A_HP") == "0") return true;
+            if (AccessClass.pull("player_A_HP") == "0" || AccessClass.pull("player_B_HP") == "0") return true;
             return false;
         }
         // ifの中で終了したいためbool型にしている。よりよい方法知ってたら教えて 
@@ -116,6 +116,7 @@ namespace RootSysytem
                         MP_A = 0;
                         HP_B = HP_B - 45;
                     }
+                    if(HP_B < 0) HP_B = 0;
                     AccessClass.push("player_A_MP", MP_A.ToString());
                     AccessClass.push("player_B_HP", HP_B.ToString());
                     return true;
@@ -132,6 +133,7 @@ namespace RootSysytem
                         MP_B = 0;
                         HP_A = HP_B - 45;
                     }
+                    if(HP_A < 0) HP_A = 0;
                     AccessClass.push("player_B_MP", MP_B.ToString());
                     AccessClass.push("player_A_HP", HP_A.ToString());
                     return true;
@@ -146,6 +148,8 @@ namespace RootSysytem
             if (MP_B >= 100){
                 MP_B = 100;
             }
+            if (HP_A < 0) HP_A = 0;
+            if (HP_B < 0) HP_B = 0;
             AccessClass.push("player_A_MP", MP_A.ToString());
             AccessClass.push("player_A_HP", HP_A.ToString());
             AccessClass.push("player_B_MP", MP_B.ToString());
