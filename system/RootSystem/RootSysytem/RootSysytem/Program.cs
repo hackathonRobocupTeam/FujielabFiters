@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KinokoLib;
 
+
+
 namespace RootSysytem
 {
     class Program
     {
+         
         private static string game_state = "game_state";
         private static string module_name = "RootSystem";
 
@@ -22,7 +26,7 @@ namespace RootSysytem
             AccessClass.push(game_state, "start");
             // 音声認識か何かでgame_stateが変わるまで待機
             while (true) {
-                Threading.sleep(50);
+                Thread.Sleep(50);
                 if (AccessClass.update(module_name, game_state, -1)) break;
                     }
             //  バトル時の処理
@@ -52,9 +56,11 @@ namespace RootSysytem
             // game overじゃなきゃループ
             while (!(game_over))
             {
-            Threading.sleep(100);
+                Console.WriteLine(DateTime.Now);
+                Thread.Sleep(100);
                 if (AccessClass.update(module_name, "player_A_move", -1) || AccessClass.update(module_name, "player_B_move", -1))
                 {
+                    Console.WriteLine("get move:{0}", DateTime.Now);
                     if (!(attack_check()))
                     { // attackじゃなきゃHPは変動しない
                         break;
