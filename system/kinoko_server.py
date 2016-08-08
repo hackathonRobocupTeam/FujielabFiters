@@ -11,6 +11,9 @@ import time
 import copy
 import BaseHTTPServer
 import urlparse
+import Queue
+
+q = Queue.Queue()
 
 list = {}
 modules = {}
@@ -19,7 +22,6 @@ time_stamps = {}
 # request handler
 class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     """docstring for HttpHandler"""
-
     # response を書く場所
     def do_GET(self):
         parsed_path = urlparse.urlparse(self.path)
@@ -90,6 +92,7 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
            modules.update({module: {status_name: copy.deepcopy(time_stamps[status_name])}})
            return False
 
+
 def return_UNIX_time():
     return time.time()
 
@@ -102,8 +105,11 @@ def makeHttpServer(IP=None):
     httpd = BaseHTTPServer.HTTPServer(server_address, HttpHandler)
     httpd.serve_forever()
 
+
 if __name__ == '__main__':
     # code
+    # ctrl-C で止めるために他のコマンドを廃止
+    makeHttpServer()
     t = Thread(target=makeHttpServer)
     t.damon = True
     t.start()
@@ -113,6 +119,8 @@ if __name__ == '__main__':
             print (list)
         if 'modules' == cmd:
             print(modules)
-        if 'stamp' == cmd:
+        if 'times' == cmd:
             print time_stamps
-
+        if 'stop' == cmd:
+            q.put("stop")
+            print "put"
