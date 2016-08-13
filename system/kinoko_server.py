@@ -26,22 +26,27 @@ def return_UNIX_time():
 
 def sock_server():
     global stop_flag
+    print "server start"
     while stop_flag:
         conn, addr = s.accept()
         while 1:
             # 受信バイト数。特に意味はない
             data = conn.recv(2048)
-            param = dict([tmp.split('=') for tmp in data.split('&')])
+            try:
+                param = dict([tmp.split('=') for tmp in data.split('&')])
+            except:
+                pass
             if not data: break
-            # ここにdataからroleを引き出してそれぞれに応じた関数をとれるように書く
             if 'role=update' in data:
-                __update(param, conn)
+                res=Thread(target=__update(param, conn))
             if 'role=pull' in data:
-                __pull(param, conn)
+                res=Thread(target=__pull(param, conn))
             if 'role=push' in data:
-                __push(param, conn)
-            if "stop" in data:
+                res=Thread(__push(param, conn))
+            if "stop" == data:
                 sys.exit(0)
+            res.damon = True
+            res.start()
     conn.close()
 
 # リクエストに応じた情報を追加
@@ -91,7 +96,7 @@ def __update(paramater, conn):
     else:
        modules.update({module: {status_name: copy.deepcopy(time_stamps[status_name])}})
        res = False
-    conn.send(res)
+    conn.send(str(res))
 
 # initialize
 for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
